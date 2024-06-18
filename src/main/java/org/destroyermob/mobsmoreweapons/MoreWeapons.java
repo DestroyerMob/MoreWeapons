@@ -26,7 +26,6 @@ public class MoreWeapons {
 
     public MoreWeapons() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        // Test
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
