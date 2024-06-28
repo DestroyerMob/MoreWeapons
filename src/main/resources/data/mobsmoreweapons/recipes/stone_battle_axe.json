@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "#$#",
+    " $ "
+  ],
+  "key": {
+    "$": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "mobsmoreweapons:stone_battle_axe"
+  }
+}

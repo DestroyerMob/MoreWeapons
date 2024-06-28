@@ -1,6 +1,9 @@
 package org.destroyermob.mobsmoreweapons;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -13,6 +16,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.destroyermob.mobsmoreweapons.item.ModItems;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -26,6 +30,9 @@ public class MoreWeapons {
 
     public MoreWeapons() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModItems.register(modEventBus);
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -34,17 +41,45 @@ public class MoreWeapons {
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
-
-        // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            // Great Swords
+            event.accept(ModItems.WOODENGREATSWORD);
+            event.accept(ModItems.STONEGREATSWORD);
+            event.accept(ModItems.IRONGREATSWORD);
+            event.accept(ModItems.GOLDGREATSWORD);
+            event.accept(ModItems.DIAMONDGREATSWORD);
+            event.accept(ModItems.NETHERITEGREATSWORD);
 
+            // Katanas
+            event.accept(ModItems.WOODENKATANA);
+            event.accept(ModItems.STONEKATANA);
+            event.accept(ModItems.IRONKATANA);
+            event.accept(ModItems.GOLDKATANA);
+            event.accept(ModItems.DIAMONDKATANA);
+            event.accept(ModItems.NETHERITEKATANA);
+
+            // Battle Axes
+            event.accept(ModItems.WOODENBATTLEAXE);
+            event.accept(ModItems.STONEBATTLEAXE);
+            event.accept(ModItems.IRONBATTLEAXE);
+            event.accept(ModItems.GOLDBATTLEAXE);
+            event.accept(ModItems.DIAMONDBATTLEAXE);
+            event.accept(ModItems.NETHERITEBATTLEAXE);
+
+            // Knives
+            event.accept(ModItems.WOODENKNIFE);
+            event.accept(ModItems.STONEKNIFE);
+            event.accept(ModItems.IRONKNIFE);
+            event.accept(ModItems.GOLDENKNIFE);
+            event.accept(ModItems.DIAMONDKNIFE);
+            event.accept(ModItems.NETHERITEKNIFE);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

@@ -1,0 +1,31 @@
+{
+  "key.category.mobsmoreweapons": "Mobs More Weapons",
+
+  "item.mobsmoreweapons.wooden_great_sword": "Wooden Great Sword",
+  "item.mobsmoreweapons.stone_great_sword": "Stone Great Sword",
+  "item.mobsmoreweapons.iron_great_sword": "Iron Great Sword",
+  "item.mobsmoreweapons.golden_great_sword": "Golden Great Sword",
+  "item.mobsmoreweapons.diamond_great_sword": "Diamond Great Sword",
+  "item.mobsmoreweapons.netherite_great_sword": "Netherite Great Sword",
+
+  "item.mobsmoreweapons.wooden_katana": "Wooden Katana",
+  "item.mobsmoreweapons.stone_katana": "Stone Katana",
+  "item.mobsmoreweapons.iron_katana": "Iron Katana",
+  "item.mobsmoreweapons.golden_katana": "Golden Katana",
+  "item.mobsmoreweapons.diamond_katana": "Diamond Katana",
+  "item.mobsmoreweapons.netherite_katana": "Netherite Katana",
+
+  "item.mobsmoreweapons.wooden_battle_axe": "Wooden Battle Axe",
+  "item.mobsmoreweapons.stone_battle_axe": "Stone Battle Axe",
+  "item.mobsmoreweapons.iron_battle_axe": "Iron Battle Axe",
+  "item.mobsmoreweapons.golden_battle_axe": "Golden Battle Axe",
+  "item.mobsmoreweapons.diamond_battle_axe": "Diamond Battle Axe",
+  "item.mobsmoreweapons.netherite_battle_axe": "Netherite Battle Axe",
+
+  "item.mobsmoreweapons.wooden_knife": "Wooden Knife",
+  "item.mobsmoreweapons.stone_knife": "Stone Knife",
+  "item.mobsmoreweapons.iron_knife": "Iron Knife",
+  "item.mobsmoreweapons.golden_knife": "Golden Knife",
+  "item.mobsmoreweapons.diamond_knife": "Diamond Knife",
+  "item.mobsmoreweapons.netherite_knife": "Netherite Knife"
+}
