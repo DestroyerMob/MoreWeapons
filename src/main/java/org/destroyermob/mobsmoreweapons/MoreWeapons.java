@@ -48,7 +48,7 @@ public class MoreWeapons {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
-            // Great Swords
+            // Greatswords
             event.accept(ModItems.WOODENGREATSWORD);
             event.accept(ModItems.STONEGREATSWORD);
             event.accept(ModItems.IRONGREATSWORD);
@@ -79,6 +79,14 @@ public class MoreWeapons {
             event.accept(ModItems.GOLDENKNIFE);
             event.accept(ModItems.DIAMONDKNIFE);
             event.accept(ModItems.NETHERITEKNIFE);
+
+            // Machetes
+            event.accept(ModItems.WOODENMACHETE);
+            event.accept(ModItems.STONEMACHETE);
+            event.accept(ModItems.IRONMACHETE);
+            event.accept(ModItems.GOLDENMACHETE);
+            event.accept(ModItems.DIAMONDMACHETE);
+            event.accept(ModItems.NETHERITEMACHETE);
         }
     }
 

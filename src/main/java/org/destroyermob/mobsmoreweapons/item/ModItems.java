@@ -11,33 +11,33 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, MoreWeapons.MOD_ID);
 
-    // Great Swords
+    // Greatswords
     public static final RegistryObject<Item> WOODENGREATSWORD = ITEMS.register("wooden_great_sword",
-            () -> new SwordItem(Tiers.WOOD, 7, -3.5f, new Item.Properties()));
+            () -> new SwordItem(Tiers.WOOD, 12, -3.5f, new Item.Properties()));
     public static final RegistryObject<Item> STONEGREATSWORD = ITEMS.register("stone_great_sword",
-            () -> new SwordItem(Tiers.STONE, 7, -3.5f, new Item.Properties()));
+            () -> new SwordItem(Tiers.STONE, 12, -3.5f, new Item.Properties()));
     public static final RegistryObject<Item> IRONGREATSWORD = ITEMS.register("iron_great_sword",
-            () -> new SwordItem(Tiers.IRON, 7, -3.5f, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 12, -3.5f, new Item.Properties()));
     public static final RegistryObject<Item> GOLDGREATSWORD = ITEMS.register("golden_great_sword",
-            () -> new SwordItem(Tiers.GOLD, 7, -3.5f, new Item.Properties()));
+            () -> new SwordItem(Tiers.GOLD, 12, -3.5f, new Item.Properties()));
     public static final RegistryObject<Item> DIAMONDGREATSWORD = ITEMS.register("diamond_great_sword",
-            () -> new SwordItem(Tiers.DIAMOND, 7, -3.5f, new Item.Properties()));
+            () -> new SwordItem(Tiers.DIAMOND, 12, -3.5f, new Item.Properties()));
     public static final RegistryObject<Item> NETHERITEGREATSWORD = ITEMS.register("netherite_great_sword",
-            () -> new SwordItem(Tiers.NETHERITE, 7, -3.5f, new Item.Properties()));
+            () -> new SwordItem(Tiers.NETHERITE, 12, -3.5f, new Item.Properties()));
 
     // Katanas
     public static final RegistryObject<Item> WOODENKATANA = ITEMS.register("wooden_katana",
-            () -> new SwordItem(Tiers.WOOD, 1, -2.2f, new Item.Properties()));
+            () -> new SwordItem(Tiers.WOOD, 2, -2.1f, new Item.Properties()));
     public static final RegistryObject<Item> STONEKATANA = ITEMS.register("stone_katana",
-            () -> new SwordItem(Tiers.STONE, 1, -2.2f, new Item.Properties()));
+            () -> new SwordItem(Tiers.STONE, 2, -2.1f, new Item.Properties()));
     public static final RegistryObject<Item> IRONKATANA = ITEMS.register("iron_katana",
-            () -> new SwordItem(Tiers.IRON, 1, -2.2f, new Item.Properties()));
+            () -> new SwordItem(Tiers.IRON, 2, -2.1f, new Item.Properties()));
     public static final RegistryObject<Item> GOLDKATANA = ITEMS.register("golden_katana",
-            () -> new SwordItem(Tiers.GOLD, 1, -2.2f, new Item.Properties()));
+            () -> new SwordItem(Tiers.GOLD, 2, -2.1f, new Item.Properties()));
     public static final RegistryObject<Item> DIAMONDKATANA = ITEMS.register("diamond_katana",
-            () -> new SwordItem(Tiers.DIAMOND, 1, -2.2f, new Item.Properties()));
+            () -> new SwordItem(Tiers.DIAMOND, 2, -2.1f, new Item.Properties()));
     public static final RegistryObject<Item> NETHERITEKATANA = ITEMS.register("netherite_katana",
-            () -> new SwordItem(Tiers.NETHERITE, 1, -2.2f, new Item.Properties()));
+            () -> new SwordItem(Tiers.NETHERITE, 2, -2.1f, new Item.Properties()));
 
     // Battle Axes
     public static final RegistryObject<Item> WOODENBATTLEAXE = ITEMS.register("wooden_battle_axe",
@@ -66,6 +66,20 @@ public class ModItems {
             () -> new SwordItem(Tiers.DIAMOND, 1, -2f, new Item.Properties()));
     public static final RegistryObject<Item> NETHERITEKNIFE = ITEMS.register("netherite_knife",
             () -> new SwordItem(Tiers.NETHERITE, 1, -2f, new Item.Properties()));
+
+    // Machetes
+    public static final RegistryObject<Item> WOODENMACHETE = ITEMS.register("wooden_machete",
+            () -> new SwordItem(Tiers.WOOD, 6, -2.5f, new Item.Properties()));
+    public static final RegistryObject<Item> STONEMACHETE = ITEMS.register("stone_machete",
+            () -> new SwordItem(Tiers.STONE, 6, -2.5f, new Item.Properties()));
+    public static final RegistryObject<Item> IRONMACHETE = ITEMS.register("iron_machete",
+            () -> new SwordItem(Tiers.IRON, 6, -2.5f, new Item.Properties()));
+    public static final RegistryObject<Item> GOLDENMACHETE = ITEMS.register("golden_machete",
+            () -> new SwordItem(Tiers.GOLD, 6, -2.5f, new Item.Properties()));
+    public static final RegistryObject<Item> DIAMONDMACHETE = ITEMS.register("diamond_machete",
+            () -> new SwordItem(Tiers.DIAMOND, 6, -2.5f, new Item.Properties()));
+    public static final RegistryObject<Item> NETHERITEMACHETE = ITEMS.register("netherite_machete",
+            () -> new SwordItem(Tiers.NETHERITE, 6, -2.5f, new Item.Properties()));
 
 
     public static void register(IEventBus bus) {

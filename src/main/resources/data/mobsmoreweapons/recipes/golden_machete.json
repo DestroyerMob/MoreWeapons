@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " # ",
+    "## ",
+    " $ "
+  ],
+  "key": {
+    "$": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "item": "mobsmoreweapons:golden_machete"
+  }
+}

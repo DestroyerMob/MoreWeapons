@@ -1,12 +1,12 @@
 {
   "key.category.mobsmoreweapons": "Mobs More Weapons",
 
-  "item.mobsmoreweapons.wooden_great_sword": "Wooden Great Sword",
-  "item.mobsmoreweapons.stone_great_sword": "Stone Great Sword",
-  "item.mobsmoreweapons.iron_great_sword": "Iron Great Sword",
-  "item.mobsmoreweapons.golden_great_sword": "Golden Great Sword",
-  "item.mobsmoreweapons.diamond_great_sword": "Diamond Great Sword",
-  "item.mobsmoreweapons.netherite_great_sword": "Netherite Great Sword",
+  "item.mobsmoreweapons.wooden_great_sword": "Wooden Greatsword",
+  "item.mobsmoreweapons.stone_great_sword": "Stone Greatsword",
+  "item.mobsmoreweapons.iron_great_sword": "Iron Greatsword",
+  "item.mobsmoreweapons.golden_great_sword": "Golden Greatsword",
+  "item.mobsmoreweapons.diamond_great_sword": "Diamond Greatsword",
+  "item.mobsmoreweapons.netherite_great_sword": "Netherite Greatsword",
 
   "item.mobsmoreweapons.wooden_katana": "Wooden Katana",
   "item.mobsmoreweapons.stone_katana": "Stone Katana",
@@ -27,5 +27,12 @@
   "item.mobsmoreweapons.iron_knife": "Iron Knife",
   "item.mobsmoreweapons.golden_knife": "Golden Knife",
   "item.mobsmoreweapons.diamond_knife": "Diamond Knife",
-  "item.mobsmoreweapons.netherite_knife": "Netherite Knife"
+  "item.mobsmoreweapons.netherite_knife": "Netherite Knife",
+
+  "item.mobsmoreweapons.wooden_machete": "Wooden Machete",
+  "item.mobsmoreweapons.stone_machete": "Stone Machete",
+  "item.mobsmoreweapons.iron_machete": "Iron Machete",
+  "item.mobsmoreweapons.golden_machete": "Golden Machete",
+  "item.mobsmoreweapons.diamond_machete": "Diamond Machete",
+  "item.mobsmoreweapons.netherite_machete": "Netherite Machete"
 }
