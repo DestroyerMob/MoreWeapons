@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " # ",
+    "## ",
+    " $ "
+  ],
+  "key": {
+    "$": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "id": "mobsmoreweapons:wooden_machete",
+    "count": 1
+  }
+}

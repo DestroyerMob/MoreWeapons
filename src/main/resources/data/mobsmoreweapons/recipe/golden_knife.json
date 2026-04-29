@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "   ",
+    " # ",
+    "$  "
+  ],
+  "key": {
+    "$": {
+      "item": "minecraft:stick"
+    },
+    "#": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "result": {
+    "id": "mobsmoreweapons:golden_knife",
+    "count": 1
+  }
+}
