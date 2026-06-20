@@ -13,7 +13,8 @@
         "mobstoolforging:breeze"
       ],
       "z": 1,
-      "optional": false
+      "optional": false,
+      "handle_strategy": "default_handle"
     },
     {
       "slot": "katana_blade",
@@ -24,7 +25,8 @@
         "mobstoolforging:diamond"
       ],
       "z": 3,
-      "optional": false
+      "optional": false,
+      "template": "mobsmoreweapons:tool_templates/katana/katana_blade"
     },
     {
       "slot": "wide_guard",
@@ -35,7 +37,8 @@
         "mobstoolforging:diamond"
       ],
       "z": 4,
-      "optional": false
+      "optional": false,
+      "template": "mobsmoreweapons:tool_templates/katana/wide_guard"
     }
   ]
 }
