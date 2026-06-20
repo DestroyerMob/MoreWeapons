@@ -12,9 +12,15 @@
         "mobstoolforging:blaze",
         "mobstoolforging:breeze"
       ],
+      "handle_strategy": "default_handle",
+      "handle_template": "mobsmoreweapons:tool_templates/battle_axe/handle",
+      "template": "mobsmoreweapons:tool_templates/battle_axe/handle",
+      "large_template": "mobsmoreweapons:tool_templates/battle_axe/large_handle",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_battle_axe_handle_{usage}",
       "z": 1,
       "optional": false,
-      "handle_strategy": "default_handle"
+      "emissive_allowed": false
     },
     {
       "slot": "battle_axe_head",
@@ -24,9 +30,15 @@
         "mobstoolforging:gold",
         "mobstoolforging:diamond"
       ],
+      "tool_template": "mobsmoreweapons:tool_templates/battle_axe/battle_axe_head",
+      "template": "mobsmoreweapons:tool_templates/battle_axe/battle_axe_head",
+      "part_template": "mobsmoreweapons:tool_templates/battle_axe/battle_axe_head_part",
+      "large_template": "mobsmoreweapons:tool_templates/battle_axe/large_battle_axe_head",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
       "z": 3,
       "optional": false,
-      "template": "mobsmoreweapons:tool_templates/battle_axe/battle_axe_head"
+      "emissive_allowed": false
     }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "primary_part_type": "battle_axe_head",
+  "tool_items": {
+    "mobstoolforging:iron": "mobsmoreweapons:iron_battle_axe",
+    "mobstoolforging:gold": "mobsmoreweapons:golden_battle_axe",
+    "mobstoolforging:diamond": "mobsmoreweapons:diamond_battle_axe",
+    "mobstoolforging:netherite": "mobsmoreweapons:netherite_battle_axe"
+  },
+  "part_items": {
+    "battle_axe_head": {
+      "mobstoolforging:iron": "mobsmoreweapons:iron_battle_axe_head",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_battle_axe_head",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_battle_axe_head",
+      "default": "mobsmoreweapons:iron_battle_axe_head"
+    }
+  },
+  "visual": "mobsmoreweapons:battle_axe",
+  "base_attack_damage_bonus": 7.0,
+  "base_attack_speed_bonus": -3.0,
+  "sword_like": true,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ],
+  "tool_item": "mobsmoreweapons:iron_battle_axe"
+}

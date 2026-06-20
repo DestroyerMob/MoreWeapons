@@ -12,9 +12,15 @@
         "mobstoolforging:blaze",
         "mobstoolforging:breeze"
       ],
+      "handle_strategy": "default_handle",
+      "handle_template": "mobsmoreweapons:tool_templates/knife/handle",
+      "template": "mobsmoreweapons:tool_templates/knife/handle",
+      "large_template": "mobsmoreweapons:tool_templates/knife/large_handle",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_knife_handle_{usage}",
       "z": 1,
       "optional": false,
-      "handle_strategy": "default_handle"
+      "emissive_allowed": false
     },
     {
       "slot": "knife_blade",
@@ -24,9 +30,15 @@
         "mobstoolforging:gold",
         "mobstoolforging:diamond"
       ],
+      "tool_template": "mobsmoreweapons:tool_templates/knife/knife_blade",
+      "template": "mobsmoreweapons:tool_templates/knife/knife_blade",
+      "part_template": "mobsmoreweapons:tool_templates/knife/knife_blade_part",
+      "large_template": "mobsmoreweapons:tool_templates/knife/large_knife_blade",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
       "z": 3,
       "optional": false,
-      "template": "mobsmoreweapons:tool_templates/knife/knife_blade"
+      "emissive_allowed": false
     }
   ]
 }

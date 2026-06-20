@@ -1,0 +1,12 @@
+{
+  "tool_type": "mobsmoreweapons:battle_axe",
+  "slot": "head",
+  "material": "mobstoolforging:netherite",
+  "attack_damage_bonus": -1.0,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ]
+}

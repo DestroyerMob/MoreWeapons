@@ -12,9 +12,15 @@
         "mobstoolforging:blaze",
         "mobstoolforging:breeze"
       ],
+      "handle_strategy": "default_handle",
+      "handle_template": "mobsmoreweapons:tool_templates/great_sword/handle",
+      "template": "mobsmoreweapons:tool_templates/great_sword/handle",
+      "large_template": "mobsmoreweapons:tool_templates/great_sword/large_handle",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_great_sword_handle_{usage}",
       "z": 1,
       "optional": false,
-      "handle_strategy": "default_handle"
+      "emissive_allowed": false
     },
     {
       "slot": "great_sword_blade",
@@ -24,9 +30,15 @@
         "mobstoolforging:gold",
         "mobstoolforging:diamond"
       ],
+      "tool_template": "mobsmoreweapons:tool_templates/great_sword/great_sword_blade",
+      "template": "mobsmoreweapons:tool_templates/great_sword/great_sword_blade",
+      "part_template": "mobsmoreweapons:tool_templates/great_sword/great_sword_blade_part",
+      "large_template": "mobsmoreweapons:tool_templates/great_sword/large_great_sword_blade",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
       "z": 3,
       "optional": false,
-      "template": "mobsmoreweapons:tool_templates/great_sword/great_sword_blade"
+      "emissive_allowed": false
     },
     {
       "slot": "wide_guard",
@@ -36,9 +48,15 @@
         "mobstoolforging:gold",
         "mobstoolforging:diamond"
       ],
+      "tool_template": "mobsmoreweapons:tool_templates/great_sword/wide_guard",
+      "template": "mobsmoreweapons:tool_templates/great_sword/wide_guard",
+      "part_template": "mobsmoreweapons:tool_templates/great_sword/wide_guard_part",
+      "large_template": "mobsmoreweapons:tool_templates/great_sword/large_wide_guard",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
       "z": 4,
       "optional": false,
-      "template": "mobsmoreweapons:tool_templates/great_sword/wide_guard"
+      "emissive_allowed": false
     }
   ]
 }

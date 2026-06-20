@@ -1,0 +1,37 @@
+{
+  "primary_part_type": "great_sword_blade",
+  "tool_items": {
+    "mobstoolforging:iron": "mobsmoreweapons:iron_great_sword",
+    "mobstoolforging:gold": "mobsmoreweapons:golden_great_sword",
+    "mobstoolforging:diamond": "mobsmoreweapons:diamond_great_sword",
+    "mobstoolforging:netherite": "mobsmoreweapons:netherite_great_sword"
+  },
+  "part_items": {
+    "great_sword_blade": {
+      "mobstoolforging:iron": "mobsmoreweapons:iron_great_sword_blade",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_great_sword_blade",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_great_sword_blade",
+      "default": "mobsmoreweapons:iron_great_sword_blade"
+    },
+    "wide_guard": {
+      "mobstoolforging:iron": "mobsmoreweapons:iron_wide_guard",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_wide_guard",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_wide_guard",
+      "default": "mobsmoreweapons:iron_wide_guard"
+    }
+  },
+  "required_assembly_parts": [
+    "wide_guard"
+  ],
+  "visual": "mobsmoreweapons:great_sword",
+  "base_attack_damage_bonus": 12.0,
+  "base_attack_speed_bonus": -3.5,
+  "sword_like": true,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ],
+  "tool_item": "mobsmoreweapons:iron_great_sword"
+}

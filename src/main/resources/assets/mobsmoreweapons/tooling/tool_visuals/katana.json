@@ -12,9 +12,15 @@
         "mobstoolforging:blaze",
         "mobstoolforging:breeze"
       ],
+      "handle_strategy": "default_handle",
+      "handle_template": "mobsmoreweapons:tool_templates/katana/handle",
+      "template": "mobsmoreweapons:tool_templates/katana/handle",
+      "large_template": "mobsmoreweapons:tool_templates/katana/large_handle",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_katana_handle_{usage}",
       "z": 1,
       "optional": false,
-      "handle_strategy": "default_handle"
+      "emissive_allowed": false
     },
     {
       "slot": "katana_blade",
@@ -24,9 +30,15 @@
         "mobstoolforging:gold",
         "mobstoolforging:diamond"
       ],
+      "tool_template": "mobsmoreweapons:tool_templates/katana/katana_blade",
+      "template": "mobsmoreweapons:tool_templates/katana/katana_blade",
+      "part_template": "mobsmoreweapons:tool_templates/katana/katana_blade_part",
+      "large_template": "mobsmoreweapons:tool_templates/katana/large_katana_blade",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
       "z": 3,
       "optional": false,
-      "template": "mobsmoreweapons:tool_templates/katana/katana_blade"
+      "emissive_allowed": false
     },
     {
       "slot": "wide_guard",
@@ -36,9 +48,15 @@
         "mobstoolforging:gold",
         "mobstoolforging:diamond"
       ],
+      "tool_template": "mobsmoreweapons:tool_templates/katana/wide_guard",
+      "template": "mobsmoreweapons:tool_templates/katana/wide_guard",
+      "part_template": "mobsmoreweapons:tool_templates/katana/wide_guard_part",
+      "large_template": "mobsmoreweapons:tool_templates/katana/large_wide_guard",
+      "texture_namespace": "mobsmoreweapons",
+      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
       "z": 4,
       "optional": false,
-      "template": "mobsmoreweapons:tool_templates/katana/wide_guard"
+      "emissive_allowed": false
     }
   ]
 }

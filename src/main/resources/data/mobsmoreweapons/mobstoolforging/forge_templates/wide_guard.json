@@ -4,12 +4,11 @@
   "required_materials": 1,
   "required_hits": 3,
   "translation_key": "forge_template.mobsmoreweapons.wide_guard",
-  "material_whitelist": [
-    "mobstoolforging:iron",
-    "mobstoolforging:gold",
-    "mobstoolforging:diamond"
-  ],
   "minimum_hammer_level": "stone",
+  "compatible_tool_types": [
+    "mobsmoreweapons:great_sword",
+    "mobsmoreweapons:katana"
+  ],
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

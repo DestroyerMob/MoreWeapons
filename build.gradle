@@ -26,6 +26,10 @@ sourceSets.main.resources {
 }
 
 repositories {
+    maven {
+        name = 'Jared Maven'
+        url = 'https://maven.blamejared.com/'
+    }
 }
 
 neoForge {
@@ -78,6 +82,7 @@ configurations {
 }
 
 dependencies {
+    compileOnly "mezz.jei:jei-1.21.1-neoforge:${jei_version}"
 }
 
 tasks.withType(ProcessResources).configureEach {

@@ -1,0 +1,28 @@
+{
+  "primary_part_type": "machete_blade",
+  "tool_items": {
+    "mobstoolforging:iron": "mobsmoreweapons:iron_machete",
+    "mobstoolforging:gold": "mobsmoreweapons:golden_machete",
+    "mobstoolforging:diamond": "mobsmoreweapons:diamond_machete",
+    "mobstoolforging:netherite": "mobsmoreweapons:netherite_machete"
+  },
+  "part_items": {
+    "machete_blade": {
+      "mobstoolforging:iron": "mobsmoreweapons:iron_machete_blade",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_machete_blade",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_machete_blade",
+      "default": "mobsmoreweapons:iron_machete_blade"
+    }
+  },
+  "visual": "mobsmoreweapons:machete",
+  "base_attack_damage_bonus": 5.0,
+  "base_attack_speed_bonus": -2.7,
+  "sword_like": true,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ],
+  "tool_item": "mobsmoreweapons:iron_machete"
+}

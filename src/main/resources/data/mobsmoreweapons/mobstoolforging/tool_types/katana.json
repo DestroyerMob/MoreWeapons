@@ -1,0 +1,37 @@
+{
+  "primary_part_type": "katana_blade",
+  "tool_items": {
+    "mobstoolforging:iron": "mobsmoreweapons:iron_katana",
+    "mobstoolforging:gold": "mobsmoreweapons:golden_katana",
+    "mobstoolforging:diamond": "mobsmoreweapons:diamond_katana",
+    "mobstoolforging:netherite": "mobsmoreweapons:netherite_katana"
+  },
+  "part_items": {
+    "katana_blade": {
+      "mobstoolforging:iron": "mobsmoreweapons:iron_katana_blade",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_katana_blade",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_katana_blade",
+      "default": "mobsmoreweapons:iron_katana_blade"
+    },
+    "wide_guard": {
+      "mobstoolforging:iron": "mobsmoreweapons:iron_wide_guard",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_wide_guard",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_wide_guard",
+      "default": "mobsmoreweapons:iron_wide_guard"
+    }
+  },
+  "required_assembly_parts": [
+    "wide_guard"
+  ],
+  "visual": "mobsmoreweapons:katana",
+  "base_attack_damage_bonus": 2.0,
+  "base_attack_speed_bonus": -2.1,
+  "sword_like": true,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ],
+  "tool_item": "mobsmoreweapons:iron_katana"
+}
