@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PPP",
+    " S "
+  ],
+  "result": {
+    "id": "mobstoolforging:template_pattern",
+    "count": 1,
+    "components": {
+      "mobstoolforging:forge_template": "mobsmoreweapons:wide_guard"
+    }
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ]
+}

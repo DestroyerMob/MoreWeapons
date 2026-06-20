@@ -1,0 +1,19 @@
+{
+  "tool_type": "mobsmoreweapons:great_sword",
+  "part_type": "wide_guard",
+  "required_materials": 1,
+  "required_hits": 3,
+  "translation_key": "forge_template.mobsmoreweapons.wide_guard",
+  "material_whitelist": [
+    "mobstoolforging:iron",
+    "mobstoolforging:gold",
+    "mobstoolforging:diamond"
+  ],
+  "minimum_hammer_level": "stone",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ]
+}

@@ -1,14 +1,18 @@
 package org.destroyermob.mobsmoreweapons;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.destroyermob.mobsmoreweapons.compat.MobsToolForgingCompat;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
+import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreWeapons.MOD_ID)
@@ -16,6 +20,7 @@ public class MoreWeapons {
 
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "mobsmoreweapons";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public MoreWeapons(IEventBus modEventBus) {
         ModItems.register(modEventBus);
@@ -31,6 +36,9 @@ public class MoreWeapons {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        if (ModList.get().isLoaded("mobstoolforging")) {
+            event.enqueueWork(MobsToolForgingCompat::register);
+        }
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {

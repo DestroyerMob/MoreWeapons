@@ -82,9 +82,38 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITEMACHETE = ITEMS.register("netherite_machete",
             () -> new SwordItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 5, -2.7f)));
 
+    // Mobs Tool Forging compatibility parts
+    public static final DeferredItem<Item> IRONGREATSWORDBLADE = part("iron_great_sword_blade");
+    public static final DeferredItem<Item> GOLDENGREATSWORDBLADE = part("golden_great_sword_blade");
+    public static final DeferredItem<Item> DIAMONDGREATSWORDBLADE = part("diamond_great_sword_blade");
+
+    public static final DeferredItem<Item> IRONKATANABLADE = part("iron_katana_blade");
+    public static final DeferredItem<Item> GOLDENKATANABLADE = part("golden_katana_blade");
+    public static final DeferredItem<Item> DIAMONDKATANABLADE = part("diamond_katana_blade");
+
+    public static final DeferredItem<Item> IRONBATTLEAXEHEAD = part("iron_battle_axe_head");
+    public static final DeferredItem<Item> GOLDENBATTLEAXEHEAD = part("golden_battle_axe_head");
+    public static final DeferredItem<Item> DIAMONDBATTLEAXEHEAD = part("diamond_battle_axe_head");
+
+    public static final DeferredItem<Item> IRONKNIFEBLADE = part("iron_knife_blade");
+    public static final DeferredItem<Item> GOLDENKNIFEBLADE = part("golden_knife_blade");
+    public static final DeferredItem<Item> DIAMONDKNIFEBLADE = part("diamond_knife_blade");
+
+    public static final DeferredItem<Item> IRONMACHETEBLADE = part("iron_machete_blade");
+    public static final DeferredItem<Item> GOLDENMACHETEBLADE = part("golden_machete_blade");
+    public static final DeferredItem<Item> DIAMONDMACHETEBLADE = part("diamond_machete_blade");
+
+    public static final DeferredItem<Item> IRONWIDEGUARD = part("iron_wide_guard");
+    public static final DeferredItem<Item> GOLDENWIDEGUARD = part("golden_wide_guard");
+    public static final DeferredItem<Item> DIAMONDWIDEGUARD = part("diamond_wide_guard");
+
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
+    }
+
+    private static DeferredItem<Item> part(String name) {
+        return ITEMS.register(name, () -> new Item(new Item.Properties()));
     }
 
     private static Item.Properties weaponProperties(Tier tier, int attackDamage, float attackSpeed) {

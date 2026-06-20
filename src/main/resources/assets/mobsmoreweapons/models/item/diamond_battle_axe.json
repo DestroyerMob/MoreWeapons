@@ -1,6 +1,7 @@
 {
-  "parent": "item/handheld",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "mobsmoreweapons:item/diamond_battle_axe"
+    "layer0": "mobsmoreweapons:source/tool_parts/stick/stick_battle_axe_handle_tool",
+    "layer1": "mobsmoreweapons:source/tool_parts/diamond/diamond_battle_axe_head_tool"
   }
 }

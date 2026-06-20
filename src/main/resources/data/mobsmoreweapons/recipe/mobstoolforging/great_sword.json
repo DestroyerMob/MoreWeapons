@@ -1,0 +1,11 @@
+{
+  "type": "mobstoolforging:crafting_special_modular_tool",
+  "category": "equipment",
+  "tool_type": "mobsmoreweapons:great_sword",
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ]
+}

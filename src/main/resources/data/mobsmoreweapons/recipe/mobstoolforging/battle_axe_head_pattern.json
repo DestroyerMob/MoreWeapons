@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    " S "
+  ],
+  "result": {
+    "id": "mobstoolforging:template_pattern",
+    "count": 1,
+    "components": {
+      "mobstoolforging:forge_template": "mobsmoreweapons:battle_axe_head"
+    }
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ]
+}

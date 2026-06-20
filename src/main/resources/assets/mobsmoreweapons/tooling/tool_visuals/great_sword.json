@@ -1,0 +1,41 @@
+{
+  "type": "mobstoolforging:tool_visual",
+  "canvas": 16,
+  "large_canvas": 32,
+  "large_in_hand": true,
+  "layers": [
+    {
+      "slot": "handle",
+      "material_from": "handleMaterial",
+      "materials": [
+        "mobstoolforging:oak",
+        "mobstoolforging:blaze",
+        "mobstoolforging:breeze"
+      ],
+      "z": 1,
+      "optional": false
+    },
+    {
+      "slot": "great_sword_blade",
+      "material_from": "headMaterial",
+      "materials": [
+        "mobstoolforging:iron",
+        "mobstoolforging:gold",
+        "mobstoolforging:diamond"
+      ],
+      "z": 3,
+      "optional": false
+    },
+    {
+      "slot": "wide_guard",
+      "material_from": "bindingMaterial",
+      "materials": [
+        "mobstoolforging:iron",
+        "mobstoolforging:gold",
+        "mobstoolforging:diamond"
+      ],
+      "z": 4,
+      "optional": false
+    }
+  ]
+}

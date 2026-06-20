@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mobsmoreweapons:source/tool_parts/gold/gold_battle_axe_head_part"
+  }
+}

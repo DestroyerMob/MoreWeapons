@@ -1,6 +1,8 @@
 {
-  "parent": "item/handheld",
+  "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "mobsmoreweapons:item/iron_great_sword"
+    "layer0": "mobsmoreweapons:source/tool_parts/stick/stick_great_sword_handle_tool",
+    "layer1": "mobsmoreweapons:source/tool_parts/iron/iron_great_sword_blade_tool",
+    "layer2": "mobsmoreweapons:source/tool_parts/iron/iron_wide_guard_tool"
   }
 }
