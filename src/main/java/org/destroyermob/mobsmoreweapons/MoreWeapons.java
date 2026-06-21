@@ -7,6 +7,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.destroyermob.mobsmoreweapons.event.KatanaBlockingEvents;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -21,6 +22,7 @@ public class MoreWeapons {
 
         // Register ourselves for server and other game events we are interested in
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.addListener(KatanaBlockingEvents::onLivingShieldBlock);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
