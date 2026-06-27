@@ -6,9 +6,10 @@
   "translation_key": "forge_template.mobsmoreweapons.wide_guard",
   "minimum_hammer_level": "stone",
   "compatible_tool_types": [
-    "mobsmoreweapons:great_sword",
-    "mobsmoreweapons:katana"
+    "mobsmoreweapons:great_sword"
   ],
+  "pattern_station_enabled": true,
+  "pattern_station_paper_cost": 3,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

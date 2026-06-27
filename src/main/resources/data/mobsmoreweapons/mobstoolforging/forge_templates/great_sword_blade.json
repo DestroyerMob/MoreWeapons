@@ -8,6 +8,8 @@
   "compatible_tool_types": [
     "mobsmoreweapons:great_sword"
   ],
+  "pattern_station_enabled": true,
+  "pattern_station_paper_cost": 6,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",

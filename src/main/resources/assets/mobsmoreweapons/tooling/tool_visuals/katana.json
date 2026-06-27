@@ -39,24 +39,6 @@
       "z": 3,
       "optional": false,
       "emissive_allowed": false
-    },
-    {
-      "slot": "wide_guard",
-      "material_from": "bindingMaterial",
-      "materials": [
-        "mobstoolforging:iron",
-        "mobstoolforging:gold",
-        "mobstoolforging:diamond"
-      ],
-      "tool_template": "mobsmoreweapons:tool_templates/katana/wide_guard",
-      "template": "mobsmoreweapons:tool_templates/katana/wide_guard",
-      "part_template": "mobsmoreweapons:tool_templates/katana/wide_guard_part",
-      "large_template": "mobsmoreweapons:tool_templates/katana/large_wide_guard",
-      "texture_namespace": "mobsmoreweapons",
-      "texture_pattern": "source/tool_parts/{material}/{material}_{slot}_{usage}",
-      "z": 4,
-      "optional": false,
-      "emissive_allowed": false
     }
   ]
 }

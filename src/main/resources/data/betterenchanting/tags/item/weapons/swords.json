@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#mobstoolforging:parts/great_sword_blade",
+    "#mobstoolforging:parts/katana_blade",
+    "#mobstoolforging:parts/knife_blade",
+    "#mobstoolforging:parts/machete_blade",
+    "#mobstoolforging:parts/wide_guard"
+  ]
+}

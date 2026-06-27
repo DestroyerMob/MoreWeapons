@@ -1,0 +1,39 @@
+{
+  "item_tags": [
+    {
+      "tag": "mobstoolforging:parts",
+      "label": "Part",
+      "color": "#c7a0ff"
+    },
+    {
+      "tag": "mobstoolforging:parts/battle_axe_head",
+      "label": "Battle Axe Head",
+      "color": "#55d66b"
+    },
+    {
+      "tag": "mobstoolforging:parts/great_sword_blade",
+      "label": "Great Sword Blade",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "mobstoolforging:parts/katana_blade",
+      "label": "Katana Blade",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "mobstoolforging:parts/knife_blade",
+      "label": "Knife Blade",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "mobstoolforging:parts/machete_blade",
+      "label": "Machete Blade",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "mobstoolforging:parts/wide_guard",
+      "label": "Wide Guard",
+      "color": "#ff6464"
+    }
+  ]
+}

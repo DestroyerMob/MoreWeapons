@@ -1,5 +1,8 @@
 package org.destroyermob.mobsmoreweapons.event;
 
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import org.destroyermob.mobsmoreweapons.item.KatanaItem;
 
@@ -12,7 +15,19 @@ public final class KatanaBlockingEvents {
             return;
         }
 
-        event.setBlockedDamage(event.getOriginalBlockedDamage() * KatanaItem.BLOCKED_DAMAGE_FRACTION);
+        float finalDamage = KatanaItem.getOldBlockingDamage(event.getOriginalBlockedDamage());
+        event.setBlockedDamage(event.getOriginalBlockedDamage() - finalDamage);
         event.setShieldDamage(0.0F);
+        resetAttackTimer(event.getEntity());
+    }
+
+    private static void resetAttackTimer(LivingEntity entity) {
+        if (entity.level().isClientSide || !(entity instanceof Player player)) {
+            return;
+        }
+
+        InteractionHand hand = player.getUsedItemHand();
+        player.swing(hand, true);
+        player.resetAttackStrengthTicker();
     }
 }

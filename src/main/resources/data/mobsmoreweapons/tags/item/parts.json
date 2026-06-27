@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#mobsmoreweapons:parts/battle_axe_head",
+    "#mobsmoreweapons:parts/great_sword_blade",
+    "#mobsmoreweapons:parts/katana_blade",
+    "#mobsmoreweapons:parts/knife_blade",
+    "#mobsmoreweapons:parts/machete_blade",
+    "#mobsmoreweapons:parts/wide_guard"
+  ]
+}

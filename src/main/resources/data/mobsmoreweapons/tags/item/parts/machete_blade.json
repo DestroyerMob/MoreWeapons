@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:iron_machete_blade",
+    "mobsmoreweapons:golden_machete_blade",
+    "mobsmoreweapons:diamond_machete_blade"
+  ]
+}

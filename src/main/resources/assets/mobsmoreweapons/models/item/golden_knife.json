@@ -1,7 +1,6 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "item/handheld",
   "textures": {
-    "layer0": "mobsmoreweapons:source/tool_parts/stick/stick_knife_handle_tool",
-    "layer1": "mobsmoreweapons:source/tool_parts/gold/gold_knife_blade_tool"
+    "layer0": "mobsmoreweapons:item/golden_knife"
   }
 }

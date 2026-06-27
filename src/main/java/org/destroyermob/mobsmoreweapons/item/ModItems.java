@@ -1,9 +1,14 @@
 package org.destroyermob.mobsmoreweapons.item;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -11,6 +16,8 @@ import org.destroyermob.mobsmoreweapons.MoreWeapons;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MoreWeapons.MOD_ID);
+    private static final ResourceLocation KATANA_REACH_ID = ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "katana_reach");
+    private static final ResourceLocation KNIFE_REACH_ID = ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "knife_reach");
 
     // Greatswords
     public static final DeferredItem<Item> WOODENGREATSWORD = ITEMS.register("wooden_great_sword",
@@ -28,17 +35,17 @@ public class ModItems {
 
     // Katanas
     public static final DeferredItem<Item> WOODENKATANA = ITEMS.register("wooden_katana",
-            () -> new KatanaItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 2, -2.1f)));
+            () -> new KatanaItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 2, -2.1f, KATANA_REACH_ID, 2.0D)));
     public static final DeferredItem<Item> STONEKATANA = ITEMS.register("stone_katana",
-            () -> new KatanaItem(Tiers.STONE, weaponProperties(Tiers.STONE, 2, -2.1f)));
+            () -> new KatanaItem(Tiers.STONE, weaponProperties(Tiers.STONE, 2, -2.1f, KATANA_REACH_ID, 2.0D)));
     public static final DeferredItem<Item> IRONKATANA = ITEMS.register("iron_katana",
-            () -> new KatanaItem(Tiers.IRON, weaponProperties(Tiers.IRON, 2, -2.1f)));
+            () -> new KatanaItem(Tiers.IRON, weaponProperties(Tiers.IRON, 2, -2.1f, KATANA_REACH_ID, 2.0D)));
     public static final DeferredItem<Item> GOLDKATANA = ITEMS.register("golden_katana",
-            () -> new KatanaItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 2, -2.1f)));
+            () -> new KatanaItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 2, -2.1f, KATANA_REACH_ID, 2.0D)));
     public static final DeferredItem<Item> DIAMONDKATANA = ITEMS.register("diamond_katana",
-            () -> new KatanaItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 2, -2.1f)));
+            () -> new KatanaItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 2, -2.1f, KATANA_REACH_ID, 2.0D)));
     public static final DeferredItem<Item> NETHERITEKATANA = ITEMS.register("netherite_katana",
-            () -> new KatanaItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 2, -2.1f)));
+            () -> new KatanaItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 2, -2.1f, KATANA_REACH_ID, 2.0D)));
 
     // Battle Axes
     public static final DeferredItem<Item> WOODENBATTLEAXE = ITEMS.register("wooden_battle_axe",
@@ -56,17 +63,17 @@ public class ModItems {
 
     // Knives
     public static final DeferredItem<Item> WOODENKNIFE = ITEMS.register("wooden_knife",
-            () -> new KnifeItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 1, -2f)));
+            () -> new KnifeItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 1, -2f, KNIFE_REACH_ID, -1.0D)));
     public static final DeferredItem<Item> STONEKNIFE = ITEMS.register("stone_knife",
-            () -> new KnifeItem(Tiers.STONE, weaponProperties(Tiers.STONE, 1, -2f)));
+            () -> new KnifeItem(Tiers.STONE, weaponProperties(Tiers.STONE, 1, -2f, KNIFE_REACH_ID, -1.0D)));
     public static final DeferredItem<Item> IRONKNIFE = ITEMS.register("iron_knife",
-            () -> new KnifeItem(Tiers.IRON, weaponProperties(Tiers.IRON, 1, -2f)));
+            () -> new KnifeItem(Tiers.IRON, weaponProperties(Tiers.IRON, 1, -2f, KNIFE_REACH_ID, -1.0D)));
     public static final DeferredItem<Item> GOLDENKNIFE = ITEMS.register("golden_knife",
-            () -> new KnifeItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 1, -2f)));
+            () -> new KnifeItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 1, -2f, KNIFE_REACH_ID, -1.0D)));
     public static final DeferredItem<Item> DIAMONDKNIFE = ITEMS.register("diamond_knife",
-            () -> new KnifeItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 1, -2f)));
+            () -> new KnifeItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 1, -2f, KNIFE_REACH_ID, -1.0D)));
     public static final DeferredItem<Item> NETHERITEKNIFE = ITEMS.register("netherite_knife",
-            () -> new KnifeItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 1, -2f)));
+            () -> new KnifeItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 1, -2f, KNIFE_REACH_ID, -1.0D)));
 
     // Machetes
     public static final DeferredItem<Item> WOODENMACHETE = ITEMS.register("wooden_machete",
@@ -120,6 +127,18 @@ public class ModItems {
         return new Item.Properties()
                 .durability(tier.getUses())
                 .attributes(SwordItem.createAttributes(tier, attackDamage, attackSpeed));
+    }
+
+    private static Item.Properties weaponProperties(Tier tier, int attackDamage, float attackSpeed, ResourceLocation reachId, double reachModifier) {
+        ItemAttributeModifiers attributes = SwordItem.createAttributes(tier, attackDamage, attackSpeed)
+                .withModifierAdded(
+                        Attributes.ENTITY_INTERACTION_RANGE,
+                        new AttributeModifier(reachId, reachModifier, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                );
+        return new Item.Properties()
+                .durability(tier.getUses())
+                .attributes(attributes);
     }
 
 }

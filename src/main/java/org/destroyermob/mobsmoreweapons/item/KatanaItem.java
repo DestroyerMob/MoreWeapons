@@ -14,9 +14,9 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 // For future custom logic
 public class KatanaItem extends SwordItem {
-    public static final float BLOCKED_DAMAGE_FRACTION = 0.5F;
-
     private static final int BLOCK_USE_DURATION_TICKS = 72000;
+    private static final float OLD_BLOCKING_DAMAGE_OFFSET = 1.0F;
+    private static final float OLD_BLOCKING_DAMAGE_MULTIPLIER = 0.5F;
 
     public KatanaItem(Tier tier, Properties properties) {
         super(tier, properties);
@@ -26,6 +26,7 @@ public class KatanaItem extends SwordItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         player.startUsingItem(hand);
+        player.setSprinting(false);
         return InteractionResultHolder.consume(stack);
     }
 
@@ -37,6 +38,10 @@ public class KatanaItem extends SwordItem {
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return BLOCK_USE_DURATION_TICKS;
+    }
+
+    public static float getOldBlockingDamage(float damage) {
+        return Math.min(damage, (OLD_BLOCKING_DAMAGE_OFFSET + damage) * OLD_BLOCKING_DAMAGE_MULTIPLIER);
     }
 
     @Override

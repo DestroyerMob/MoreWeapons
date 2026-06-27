@@ -1,0 +1,22 @@
+{
+  "item_limits": {
+    "mobsmoreweapons:iron_battle_axe_head": 2,
+    "mobsmoreweapons:golden_battle_axe_head": 2,
+    "mobsmoreweapons:diamond_battle_axe_head": 2,
+    "mobsmoreweapons:iron_great_sword_blade": 2,
+    "mobsmoreweapons:golden_great_sword_blade": 2,
+    "mobsmoreweapons:diamond_great_sword_blade": 2,
+    "mobsmoreweapons:iron_katana_blade": 2,
+    "mobsmoreweapons:golden_katana_blade": 2,
+    "mobsmoreweapons:diamond_katana_blade": 2,
+    "mobsmoreweapons:iron_knife_blade": 2,
+    "mobsmoreweapons:golden_knife_blade": 2,
+    "mobsmoreweapons:diamond_knife_blade": 2,
+    "mobsmoreweapons:iron_machete_blade": 2,
+    "mobsmoreweapons:golden_machete_blade": 2,
+    "mobsmoreweapons:diamond_machete_blade": 2,
+    "mobsmoreweapons:iron_wide_guard": 1,
+    "mobsmoreweapons:golden_wide_guard": 1,
+    "mobsmoreweapons:diamond_wide_guard": 1
+  }
+}

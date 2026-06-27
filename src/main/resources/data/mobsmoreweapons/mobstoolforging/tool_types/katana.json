@@ -12,17 +12,8 @@
       "mobstoolforging:gold": "mobsmoreweapons:golden_katana_blade",
       "mobstoolforging:diamond": "mobsmoreweapons:diamond_katana_blade",
       "default": "mobsmoreweapons:iron_katana_blade"
-    },
-    "wide_guard": {
-      "mobstoolforging:iron": "mobsmoreweapons:iron_wide_guard",
-      "mobstoolforging:gold": "mobsmoreweapons:golden_wide_guard",
-      "mobstoolforging:diamond": "mobsmoreweapons:diamond_wide_guard",
-      "default": "mobsmoreweapons:iron_wide_guard"
     }
   },
-  "required_assembly_parts": [
-    "wide_guard"
-  ],
   "visual": "mobsmoreweapons:katana",
   "base_attack_damage_bonus": 2.0,
   "base_attack_speed_bonus": -2.1,

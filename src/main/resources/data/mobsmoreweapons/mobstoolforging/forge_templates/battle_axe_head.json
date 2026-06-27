@@ -8,6 +8,8 @@
   "compatible_tool_types": [
     "mobsmoreweapons:battle_axe"
   ],
+  "pattern_station_enabled": true,
+  "pattern_station_paper_cost": 5,
   "neoforge:conditions": [
     {
       "type": "neoforge:mod_loaded",
