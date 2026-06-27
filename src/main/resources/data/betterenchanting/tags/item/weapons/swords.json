@@ -1,10 +1,25 @@
 {
   "replace": false,
   "values": [
-    "#mobstoolforging:parts/great_sword_blade",
-    "#mobstoolforging:parts/katana_blade",
-    "#mobstoolforging:parts/knife_blade",
-    "#mobstoolforging:parts/machete_blade",
-    "#mobstoolforging:parts/wide_guard"
+    {
+      "id": "#mobstoolforging:parts/great_sword_blade",
+      "required": false
+    },
+    {
+      "id": "#mobstoolforging:parts/katana_blade",
+      "required": false
+    },
+    {
+      "id": "#mobstoolforging:parts/knife_blade",
+      "required": false
+    },
+    {
+      "id": "#mobstoolforging:parts/machete_blade",
+      "required": false
+    },
+    {
+      "id": "#mobstoolforging:parts/wide_guard",
+      "required": false
+    }
   ]
 }

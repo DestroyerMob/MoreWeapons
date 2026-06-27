@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "#mobstoolforging:parts/battle_axe_head"
+    {
+      "id": "#mobstoolforging:parts/battle_axe_head",
+      "required": false
+    }
   ]
 }
