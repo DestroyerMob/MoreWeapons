@@ -3,10 +3,13 @@ package org.destroyermob.mobsmoreweapons;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
 import org.destroyermob.mobsmoreweapons.event.KatanaBlockingEvents;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
 
@@ -17,7 +20,8 @@ public class MoreWeapons {
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "mobsmoreweapons";
 
-    public MoreWeapons(IEventBus modEventBus) {
+    public MoreWeapons(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.COMMON, MoreWeaponsConfig.SPEC);
         ModItems.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in

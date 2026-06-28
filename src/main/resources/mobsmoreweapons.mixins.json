@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "org.destroyermob.mobsmoreweapons.mixin",
+  "refmap": "mobsmoreweapons.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ProjectileAccuracyMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
