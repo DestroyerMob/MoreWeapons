@@ -42,7 +42,7 @@
     },
     {
       "slot": "wide_guard",
-      "material_from": "bindingMaterial",
+      "material_from": "guardMaterial",
       "materials": [
         "mobstoolforging:iron",
         "mobstoolforging:gold",
