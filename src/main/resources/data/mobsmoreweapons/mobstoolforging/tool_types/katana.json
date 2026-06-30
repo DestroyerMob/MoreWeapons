@@ -17,6 +17,7 @@
   "visual": "mobsmoreweapons:katana",
   "base_attack_damage_bonus": 2.0,
   "base_attack_speed_bonus": -2.1,
+  "entity_interaction_range_bonus": 2.0,
   "sword_like": true,
   "neoforge:conditions": [
     {
