@@ -7,11 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
-import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -34,32 +31,6 @@ public final class MoreWeaponsJeiPlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
         return modLoc("jei");
-    }
-
-    @Override
-    public void registerItemSubtypes(ISubtypeRegistration registration) {
-        if (!ModList.get().isLoaded(MTF)) {
-            return;
-        }
-        try {
-            Item templatePattern = mtfItem("TEMPLATE_PATTERN");
-            DataComponentType<ResourceLocation> component = forgeTemplateComponent();
-            registration.registerSubtypeInterpreter(templatePattern, new ISubtypeInterpreter<>() {
-                @Override
-                public Object getSubtypeData(ItemStack stack, UidContext context) {
-                    return stack.get(component);
-                }
-
-                @Override
-                @Deprecated
-                public String getLegacyStringSubtypeInfo(ItemStack stack, UidContext context) {
-                    ResourceLocation template = stack.get(component);
-                    return template == null ? "" : template.toString();
-                }
-            });
-        } catch (ReflectiveOperationException | LinkageError ignored) {
-            // MTF/JEI versions without the generic pattern item still work without this subtype hint.
-        }
     }
 
     @Override
