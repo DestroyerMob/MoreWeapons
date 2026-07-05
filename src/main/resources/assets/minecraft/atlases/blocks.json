@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:directory",
+      "source": "source/tool_parts",
+      "prefix": "source/tool_parts/"
+    },
+    {
+      "type": "minecraft:directory",
+      "source": "tool_templates",
+      "prefix": "tool_templates/"
+    }
+  ]
+}
