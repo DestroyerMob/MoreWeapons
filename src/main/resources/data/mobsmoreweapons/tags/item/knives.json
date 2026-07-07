@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:wooden_knife",
+    "mobsmoreweapons:stone_knife",
+    "mobsmoreweapons:iron_knife",
+    "mobsmoreweapons:golden_knife",
+    "mobsmoreweapons:diamond_knife",
+    "mobsmoreweapons:netherite_knife"
+  ]
+}

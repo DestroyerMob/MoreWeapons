@@ -1,0 +1,73 @@
+{
+  "routes": [
+    {
+      "item_tag": "mobsmoreweapons:battle_axes",
+      "parts": [
+        {
+          "part_type": "battle_axe_head",
+          "limit": 2
+        },
+        {
+          "item_tag": "mobstoolforging:parts/handle",
+          "limit": 1
+        }
+      ]
+    },
+    {
+      "item_tag": "mobsmoreweapons:great_swords",
+      "parts": [
+        {
+          "part_type": "great_sword_blade",
+          "limit": 2
+        },
+        {
+          "part_type": "wide_guard",
+          "limit": 1
+        },
+        {
+          "item_tag": "mobstoolforging:parts/handle",
+          "limit": 1
+        }
+      ]
+    },
+    {
+      "item_tag": "mobsmoreweapons:katanas",
+      "parts": [
+        {
+          "part_type": "katana_blade",
+          "limit": 2
+        },
+        {
+          "item_tag": "mobstoolforging:parts/handle",
+          "limit": 1
+        }
+      ]
+    },
+    {
+      "item_tag": "mobsmoreweapons:knives",
+      "parts": [
+        {
+          "part_type": "knife_blade",
+          "limit": 2
+        },
+        {
+          "item_tag": "mobstoolforging:parts/handle",
+          "limit": 1
+        }
+      ]
+    },
+    {
+      "item_tag": "mobsmoreweapons:machetes",
+      "parts": [
+        {
+          "part_type": "machete_blade",
+          "limit": 2
+        },
+        {
+          "item_tag": "mobstoolforging:parts/handle",
+          "limit": 1
+        }
+      ]
+    }
+  ]
+}

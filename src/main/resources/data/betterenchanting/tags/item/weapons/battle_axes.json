@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#mobsmoreweapons:battle_axes",
     {
       "id": "#mobstoolforging:parts/battle_axe_head",
       "required": false

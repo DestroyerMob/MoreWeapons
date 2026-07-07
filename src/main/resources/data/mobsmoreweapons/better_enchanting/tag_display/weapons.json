@@ -1,0 +1,56 @@
+{
+  "item_tags": [
+    {
+      "tag": "betterenchanting:weapons/battle_axes",
+      "label": "Battle Axe",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:weapons/great_swords",
+      "label": "Great Sword",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:weapons/katanas",
+      "label": "Katana",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:weapons/knives",
+      "label": "Knife",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:weapons/machetes",
+      "label": "Machete",
+      "color": "#ff6464"
+    }
+  ],
+  "enchantment_target_tags": [
+    {
+      "tag": "betterenchanting:targets/weapons/battle_axes",
+      "label": "Battle Axe",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:targets/weapons/great_swords",
+      "label": "Great Sword",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:targets/weapons/katanas",
+      "label": "Katana",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:targets/weapons/knives",
+      "label": "Knife",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:targets/weapons/machetes",
+      "label": "Machete",
+      "color": "#ff6464"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:wooden_katana",
+    "mobsmoreweapons:stone_katana",
+    "mobsmoreweapons:iron_katana",
+    "mobsmoreweapons:golden_katana",
+    "mobsmoreweapons:diamond_katana",
+    "mobsmoreweapons:netherite_katana"
+  ]
+}

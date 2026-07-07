@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#mobsmoreweapons:great_swords",
+    {
+      "id": "#mobstoolforging:parts/great_sword_blade",
+      "required": false
+    },
+    {
+      "id": "#mobstoolforging:parts/wide_guard",
+      "required": false
+    }
+  ]
+}

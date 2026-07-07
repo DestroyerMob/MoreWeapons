@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {
+      "item_tag": "betterenchanting:weapons/battle_axes",
+      "enchantment_tag": "betterenchanting:targets/weapons/battle_axes"
+    },
+    {
+      "item_tag": "betterenchanting:weapons/great_swords",
+      "enchantment_tag": "betterenchanting:targets/weapons/great_swords"
+    },
+    {
+      "item_tag": "betterenchanting:weapons/katanas",
+      "enchantment_tag": "betterenchanting:targets/weapons/katanas"
+    },
+    {
+      "item_tag": "betterenchanting:weapons/knives",
+      "enchantment_tag": "betterenchanting:targets/weapons/knives"
+    },
+    {
+      "item_tag": "betterenchanting:weapons/machetes",
+      "enchantment_tag": "betterenchanting:targets/weapons/machetes"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#mobsmoreweapons:katanas",
+    {
+      "id": "#mobstoolforging:parts/katana_blade",
+      "required": false
+    }
+  ]
+}

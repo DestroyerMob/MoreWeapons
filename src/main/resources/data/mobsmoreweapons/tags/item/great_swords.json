@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:wooden_great_sword",
+    "mobsmoreweapons:stone_great_sword",
+    "mobsmoreweapons:iron_great_sword",
+    "mobsmoreweapons:golden_great_sword",
+    "mobsmoreweapons:diamond_great_sword",
+    "mobsmoreweapons:netherite_great_sword"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:wooden_machete",
+    "mobsmoreweapons:stone_machete",
+    "mobsmoreweapons:iron_machete",
+    "mobsmoreweapons:golden_machete",
+    "mobsmoreweapons:diamond_machete",
+    "mobsmoreweapons:netherite_machete"
+  ]
+}

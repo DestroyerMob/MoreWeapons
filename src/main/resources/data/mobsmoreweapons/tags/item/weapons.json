@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#mobsmoreweapons:battle_axes",
+    "#mobsmoreweapons:great_swords",
+    "#mobsmoreweapons:katanas",
+    "#mobsmoreweapons:knives",
+    "#mobsmoreweapons:machetes"
+  ]
+}

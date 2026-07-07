@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:wooden_battle_axe",
+    "mobsmoreweapons:stone_battle_axe",
+    "mobsmoreweapons:iron_battle_axe",
+    "mobsmoreweapons:golden_battle_axe",
+    "mobsmoreweapons:diamond_battle_axe",
+    "mobsmoreweapons:netherite_battle_axe"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#betterenchanting:weapons/battle_axes",
+    "#betterenchanting:weapons/great_swords",
+    "#betterenchanting:weapons/katanas",
+    "#betterenchanting:weapons/knives",
+    "#betterenchanting:weapons/machetes"
+  ]
+}

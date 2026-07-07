@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#mobsmoreweapons:knives",
+    {
+      "id": "#mobstoolforging:parts/knife_blade",
+      "required": false
+    }
+  ]
+}
