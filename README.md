@@ -6,6 +6,14 @@ MoreWeapons is a NeoForge 1.21.1 weapon expansion for Minecraft Beyond. It adds 
 
 Active internal playtesting on the `1.21.1-neoforge` branch. The core weapon set, recipes, models, and pack integrations are present; balance and final art are still in progress.
 
+## Project Facts
+
+- Mod id: `mobsmoreweapons`
+- Current version: `0.4-1.21.1-neoforge`
+- Target: Minecraft 1.21.1, NeoForge 21.1.234, Java 21
+- Optional integration: Mobs Tool Forging 0.1.0 or newer
+- Common config: `config/mobsmoreweapons-common.toml`
+
 ## Current Features
 
 - Five weapon families across wood, stone, iron, gold, diamond, and netherite tiers:
