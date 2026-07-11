@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:copper_spear_head",
+    "mobsmoreweapons:iron_spear_head",
+    "mobsmoreweapons:golden_spear_head",
+    "mobsmoreweapons:diamond_spear_head"
+  ]
+}

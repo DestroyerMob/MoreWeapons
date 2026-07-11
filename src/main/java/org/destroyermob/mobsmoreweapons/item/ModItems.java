@@ -13,6 +13,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.destroyermob.mobsmoreweapons.MoreWeapons;
+import org.destroyermob.mobsmoreweapons.item.tier.ModTiers;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MoreWeapons.MOD_ID);
@@ -89,6 +90,22 @@ public class ModItems {
     public static final DeferredItem<Item> NETHERITEMACHETE = ITEMS.register("netherite_machete",
             () -> new MacheteItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 5, -2.7f)));
 
+    // Spears
+    public static final DeferredItem<Item> WOODENSPEAR = ITEMS.register("wooden_spear",
+            () -> new SpearItem(Tiers.WOOD, spearProperties(Tiers.WOOD, 0, -2.46f)));
+    public static final DeferredItem<Item> STONESPEAR = ITEMS.register("stone_spear",
+            () -> new SpearItem(Tiers.STONE, spearProperties(Tiers.STONE, 0, -2.67f)));
+    public static final DeferredItem<Item> COPPERSPEAR = ITEMS.register("copper_spear",
+            () -> new SpearItem(ModTiers.COPPER, spearProperties(ModTiers.COPPER, 0, -2.82f)));
+    public static final DeferredItem<Item> IRONSPEAR = ITEMS.register("iron_spear",
+            () -> new SpearItem(Tiers.IRON, spearProperties(Tiers.IRON, 0, -2.95f)));
+    public static final DeferredItem<Item> GOLDENSPEAR = ITEMS.register("golden_spear",
+            () -> new SpearItem(Tiers.GOLD, spearProperties(Tiers.GOLD, 0, -2.95f)));
+    public static final DeferredItem<Item> DIAMONDSPEAR = ITEMS.register("diamond_spear",
+            () -> new SpearItem(Tiers.DIAMOND, spearProperties(Tiers.DIAMOND, 0, -3.05f)));
+    public static final DeferredItem<Item> NETHERITESPEAR = ITEMS.register("netherite_spear",
+            () -> new SpearItem(Tiers.NETHERITE, spearProperties(Tiers.NETHERITE, 0, -3.13f)));
+
     // Mobs Tool Forging compatibility parts
     public static final DeferredItem<Item> IRONGREATSWORDBLADE = part("iron_great_sword_blade");
     public static final DeferredItem<Item> GOLDENGREATSWORDBLADE = part("golden_great_sword_blade");
@@ -109,6 +126,11 @@ public class ModItems {
     public static final DeferredItem<Item> IRONMACHETEBLADE = part("iron_machete_blade");
     public static final DeferredItem<Item> GOLDENMACHETEBLADE = part("golden_machete_blade");
     public static final DeferredItem<Item> DIAMONDMACHETEBLADE = part("diamond_machete_blade");
+
+    public static final DeferredItem<Item> COPPERSPEARHEAD = part("copper_spear_head");
+    public static final DeferredItem<Item> IRONSPEARHEAD = part("iron_spear_head");
+    public static final DeferredItem<Item> GOLDENSPEARHEAD = part("golden_spear_head");
+    public static final DeferredItem<Item> DIAMONDSPEARHEAD = part("diamond_spear_head");
 
     public static final DeferredItem<Item> IRONWIDEGUARD = part("iron_wide_guard");
     public static final DeferredItem<Item> GOLDENWIDEGUARD = part("golden_wide_guard");
@@ -139,6 +161,12 @@ public class ModItems {
         return new Item.Properties()
                 .durability(tier.getUses())
                 .attributes(attributes);
+    }
+
+    private static Item.Properties spearProperties(Tier tier, int attackDamage, float attackSpeed) {
+        return new Item.Properties()
+                .durability(tier.getUses())
+                .attributes(SpearItem.createAttributes(tier, attackDamage, attackSpeed));
     }
 
 }

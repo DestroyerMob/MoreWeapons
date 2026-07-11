@@ -24,6 +24,11 @@
       "tag": "betterenchanting:weapons/machetes",
       "label": "Machete",
       "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:weapons/spears",
+      "label": "Spear",
+      "color": "#ff6464"
     }
   ],
   "enchantment_target_tags": [
@@ -50,6 +55,11 @@
     {
       "tag": "betterenchanting:targets/weapons/machetes",
       "label": "Machete",
+      "color": "#ff6464"
+    },
+    {
+      "tag": "betterenchanting:targets/weapons/spears",
+      "label": "Spear",
       "color": "#ff6464"
     }
   ]

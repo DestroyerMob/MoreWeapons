@@ -19,6 +19,10 @@
     {
       "item_tag": "betterenchanting:weapons/machetes",
       "enchantment_tag": "betterenchanting:targets/weapons/machetes"
+    },
+    {
+      "item_tag": "betterenchanting:weapons/spears",
+      "enchantment_tag": "betterenchanting:targets/weapons/spears"
     }
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#mobsmoreweapons:spears",
+    {
+      "id": "#mobstoolforging:parts/spear_head",
+      "required": false
+    }
+  ]
+}

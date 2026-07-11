@@ -68,6 +68,19 @@
           "limit": 1
         }
       ]
+    },
+    {
+      "item_tag": "mobsmoreweapons:spears",
+      "parts": [
+        {
+          "part_type": "spear_head",
+          "limit": 2
+        },
+        {
+          "item_tag": "mobstoolforging:parts/handle",
+          "limit": 1
+        }
+      ]
     }
   ]
 }

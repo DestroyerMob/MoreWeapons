@@ -31,6 +31,11 @@
       "color": "#ff6464"
     },
     {
+      "tag": "mobstoolforging:parts/spear_head",
+      "label": "Spear Head",
+      "color": "#ff6464"
+    },
+    {
       "tag": "mobstoolforging:parts/wide_guard",
       "label": "Wide Guard",
       "color": "#ff6464"

@@ -59,5 +59,6 @@ description='''${mod_description}'''
    modId="mobstoolforging"
    type="optional"
    versionRange="[0.1.0,)"
-   ordering="AFTER"
+   # MoreWeapons installs the compact/hand fallback first; MTF then wraps it for component-driven tools.
+   ordering="BEFORE"
    side="BOTH"

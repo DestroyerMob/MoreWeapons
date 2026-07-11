@@ -1,0 +1,45 @@
+{
+  "primary_part_type": "spear_head",
+  "tool_items": {
+    "mobstoolforging:copper": "mobsmoreweapons:copper_spear",
+    "mobstoolforging:iron": "mobsmoreweapons:iron_spear",
+    "mobstoolforging:gold": "mobsmoreweapons:golden_spear",
+    "mobstoolforging:diamond": "mobsmoreweapons:diamond_spear",
+    "mobstoolforging:netherite": "mobsmoreweapons:netherite_spear"
+  },
+  "part_items": {
+    "spear_head": {
+      "mobstoolforging:copper": "mobsmoreweapons:copper_spear_head",
+      "mobstoolforging:iron": "mobsmoreweapons:iron_spear_head",
+      "mobstoolforging:gold": "mobsmoreweapons:golden_spear_head",
+      "mobstoolforging:diamond": "mobsmoreweapons:diamond_spear_head",
+      "default": "mobsmoreweapons:iron_spear_head"
+    }
+  },
+  "visual": "mobsmoreweapons:spear",
+  "base_attack_damage_bonus": 0.0,
+  "base_attack_speed_bonus": -2.95,
+  "material_base_attack_damage_bonuses": {
+    "mobstoolforging:copper": -0.5,
+    "mobstoolforging:iron": 0.0,
+    "mobstoolforging:gold": 0.0,
+    "mobstoolforging:diamond": 0.0,
+    "mobstoolforging:netherite": 0.0
+  },
+  "material_base_attack_speed_bonuses": {
+    "mobstoolforging:copper": -2.82,
+    "mobstoolforging:iron": -2.95,
+    "mobstoolforging:gold": -2.95,
+    "mobstoolforging:diamond": -3.05,
+    "mobstoolforging:netherite": -3.13
+  },
+  "entity_interaction_range_bonus": 1.5,
+  "sword_like": true,
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mobstoolforging"
+    }
+  ],
+  "tool_item": "mobsmoreweapons:iron_spear"
+}

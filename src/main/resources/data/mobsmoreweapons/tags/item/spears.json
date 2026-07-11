@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:wooden_spear",
+    "mobsmoreweapons:stone_spear",
+    "mobsmoreweapons:copper_spear",
+    "mobsmoreweapons:iron_spear",
+    "mobsmoreweapons:golden_spear",
+    "mobsmoreweapons:diamond_spear",
+    "mobsmoreweapons:netherite_spear"
+  ]
+}

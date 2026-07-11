@@ -1,0 +1,8 @@
+{
+  "enchantment": "mobsmoreweapons:lunge",
+  "summary_key": "enchantment.mobsmoreweapons.lunge.desc",
+  "notes": [
+    "Lunge is spear-exclusive and activates only on a jab, never on a charge attack.",
+    "It cannot activate while mounted, swimming, flying with an elytra, or below six hunger points."
+  ]
+}

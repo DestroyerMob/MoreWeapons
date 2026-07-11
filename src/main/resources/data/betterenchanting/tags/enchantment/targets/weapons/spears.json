@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "#betterenchanting:targets/weapons/melee",
+    "mobsmoreweapons:lunge",
+    {
+      "id": "minecraft:knockback",
+      "required": false
+    },
+    {
+      "id": "minecraft:fire_aspect",
+      "required": false
+    },
+    {
+      "id": "minecraft:looting",
+      "required": false
+    }
+  ]
+}

@@ -4,7 +4,11 @@
   "refmap": "mobsmoreweapons.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ProjectileAccuracyMixin"
+    "ProjectileAccuracyMixin",
+    "SpearAttackMixin"
+  ],
+  "client": [
+    "SpearUseMovementMixin"
   ],
   "injectors": {
     "defaultRequire": 1
