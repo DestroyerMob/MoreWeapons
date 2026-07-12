@@ -1,6 +1,8 @@
 package org.destroyermob.mobsmoreweapons.mixin;
 
 import net.minecraft.client.player.LocalPlayer;
+import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
+import org.destroyermob.mobsmoreweapons.item.BattleAxeItem;
 import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,8 +23,17 @@ public abstract class SpearUseMovementMixin {
     }
 
     @ModifyConstant(method = "aiStep", constant = @Constant(floatValue = 0.2F))
-    private float mobsmoreweapons$greatSwordBraceMovement(float original) {
+    private float mobsmoreweapons$weaponPreparationMovement(float original) {
         LocalPlayer player = (LocalPlayer) (Object) this;
-        return player.isUsingItem() && player.getUseItem().getItem() instanceof GreatSwordItem ? 0.4F : original;
+        if (!player.isUsingItem()) {
+            return original;
+        }
+        if (player.getUseItem().getItem() instanceof GreatSwordItem) {
+            return 0.4F;
+        }
+        if (player.getUseItem().getItem() instanceof BattleAxeItem) {
+            return MoreWeaponsConfig.BATTLE_AXE_HOOK_MOVEMENT_MULTIPLIER.get().floatValue();
+        }
+        return original;
     }
 }

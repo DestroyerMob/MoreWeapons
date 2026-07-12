@@ -7,8 +7,10 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,25 +23,35 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
+import org.destroyermob.mobsmoreweapons.network.KnifePickupPayload;
 
 public final class ThrownKnife extends AbstractArrow implements ItemSupplier {
+    private static final String SOURCE_SLOT_TAG = "SourceInventorySlot";
+    private static final int NO_SOURCE_SLOT = -1;
+    private static final int OFF_HAND_SOURCE_SLOT = -2;
+    private static final int HOTBAR_SIZE = 9;
     private static final EntityDataAccessor<ItemStack> DATA_ITEM_STACK =
             SynchedEntityData.defineId(ThrownKnife.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Byte> DATA_LOYALTY =
             SynchedEntityData.defineId(ThrownKnife.class, EntityDataSerializers.BYTE);
     private boolean dealtDamage;
     private int clientSideReturnTickCount;
+    private int sourceInventorySlot = NO_SOURCE_SLOT;
 
     public ThrownKnife(EntityType<? extends ThrownKnife> entityType, Level level) {
         super(entityType, level);
     }
 
-    public ThrownKnife(Level level, LivingEntity owner, ItemStack stack, float damage) {
+    public ThrownKnife(Level level, Player owner, ItemStack stack, float damage, InteractionHand sourceHand) {
         super(ModEntityTypes.THROWN_KNIFE.get(), owner, level, stack, stack);
         setItem(stack);
         entityData.set(DATA_LOYALTY, getLoyaltyFromItem(stack));
         setBaseDamage(damage);
+        sourceInventorySlot = sourceHand == InteractionHand.OFF_HAND
+                ? OFF_HAND_SOURCE_SLOT
+                : owner.getInventory().selected;
         pickup = Pickup.ALLOWED;
     }
 
@@ -140,8 +152,41 @@ public final class ThrownKnife extends AbstractArrow implements ItemSupplier {
 
     @Override
     protected boolean tryPickup(Player player) {
+        if (pickup == Pickup.ALLOWED && ownedBy(player) && tryRestoreToSourceSlot(player)) {
+            return true;
+        }
         return super.tryPickup(player)
                 || isNoPhysics() && ownedBy(player) && player.getInventory().add(getPickupItem());
+    }
+
+    private boolean tryRestoreToSourceSlot(Player player) {
+        ItemStack pickupItem = getPickupItem();
+        if (pickupItem.isEmpty()) {
+            return false;
+        }
+        if (sourceInventorySlot == OFF_HAND_SOURCE_SLOT) {
+            if (!player.getOffhandItem().isEmpty()) {
+                return false;
+            }
+            player.setItemInHand(InteractionHand.OFF_HAND, pickupItem);
+            notifyPickupAnimation(player, InteractionHand.OFF_HAND);
+            return true;
+        }
+        if (sourceInventorySlot < 0 || sourceInventorySlot >= HOTBAR_SIZE
+                || !player.getInventory().getItem(sourceInventorySlot).isEmpty()) {
+            return false;
+        }
+        player.getInventory().setItem(sourceInventorySlot, pickupItem);
+        if (player.getInventory().selected == sourceInventorySlot) {
+            notifyPickupAnimation(player, InteractionHand.MAIN_HAND);
+        }
+        return true;
+    }
+
+    private static void notifyPickupAnimation(Player player, InteractionHand hand) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            PacketDistributor.sendToPlayer(serverPlayer, new KnifePickupPayload(hand));
+        }
     }
 
     @Override
@@ -155,6 +200,9 @@ public final class ThrownKnife extends AbstractArrow implements ItemSupplier {
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("DealtDamage", dealtDamage);
+        if (sourceInventorySlot != NO_SOURCE_SLOT) {
+            compound.putInt(SOURCE_SLOT_TAG, sourceInventorySlot);
+        }
     }
 
     @Override
@@ -162,6 +210,9 @@ public final class ThrownKnife extends AbstractArrow implements ItemSupplier {
         super.readAdditionalSaveData(compound);
         setItem(getPickupItemStackOrigin());
         dealtDamage = compound.getBoolean("DealtDamage");
+        sourceInventorySlot = compound.contains(SOURCE_SLOT_TAG)
+                ? compound.getInt(SOURCE_SLOT_TAG)
+                : NO_SOURCE_SLOT;
         entityData.set(DATA_LOYALTY, getLoyaltyFromItem(getPickupItemStackOrigin()));
     }
 

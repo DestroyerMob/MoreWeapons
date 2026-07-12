@@ -20,6 +20,10 @@ public class GreatSwordItem extends SwordItem {
             MoreWeapons.MOD_ID,
             "great_sword_sweep_damage"
     );
+    public static final ResourceLocation REACH_MODIFIER_ID = ResourceLocation.fromNamespaceAndPath(
+            MoreWeapons.MOD_ID,
+            "great_sword_reach"
+    );
 
     public GreatSwordItem(Tier tier, Properties properties) {
         super(tier, properties);

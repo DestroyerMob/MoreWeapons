@@ -11,6 +11,12 @@ public final class MoreWeaponsConfig {
     public static final ModConfigSpec.IntValue IAI_PRIMED_TICKS;
     public static final ModConfigSpec.DoubleValue IAI_DAMAGE_MULTIPLIER;
     public static final ModConfigSpec.DoubleValue IAI_LUNGE_FORCE;
+    public static final ModConfigSpec.IntValue BATTLE_AXE_HOOK_PREPARATION_TICKS;
+    public static final ModConfigSpec.DoubleValue BATTLE_AXE_HOOK_DAMAGE_MULTIPLIER;
+    public static final ModConfigSpec.DoubleValue BATTLE_AXE_HOOK_PULL_DISTANCE;
+    public static final ModConfigSpec.IntValue BATTLE_AXE_HOOK_SHIELD_DISABLE_TICKS;
+    public static final ModConfigSpec.DoubleValue BATTLE_AXE_HOOK_RECOVERY_CONSUMED;
+    public static final ModConfigSpec.DoubleValue BATTLE_AXE_HOOK_MOVEMENT_MULTIPLIER;
     public static final ModConfigSpec SPEC;
 
     static {
@@ -36,6 +42,27 @@ public final class MoreWeaponsConfig {
         IAI_LUNGE_FORCE = BUILDER
                 .comment("Horizontal velocity added toward the target by a fully charged quickdraw strike.")
                 .defineInRange("iai_lunge_force", 0.65D, 0.0D, 3.0D);
+        BUILDER.pop();
+
+        BUILDER.push("battle_axe");
+        BATTLE_AXE_HOOK_PREPARATION_TICKS = BUILDER
+                .comment("Ticks the battle axe must be prepared before releasing a Hooking Strike.")
+                .defineInRange("hook_preparation_ticks", 8, 1, 200);
+        BATTLE_AXE_HOOK_DAMAGE_MULTIPLIER = BUILDER
+                .comment("Hooking Strike damage as a fraction of the wielder's normal attack damage.")
+                .defineInRange("hook_damage_multiplier", 0.35D, 0.0D, 1.0D);
+        BATTLE_AXE_HOOK_PULL_DISTANCE = BUILDER
+                .comment("Approximate maximum horizontal pull distance before knockback resistance is applied.")
+                .defineInRange("hook_pull_distance", 1.5D, 0.0D, 4.0D);
+        BATTLE_AXE_HOOK_SHIELD_DISABLE_TICKS = BUILDER
+                .comment("Ticks a shield is disabled when caught by Hooking Strike.")
+                .defineInRange("hook_shield_disable_ticks", 30, 1, 200);
+        BATTLE_AXE_HOOK_RECOVERY_CONSUMED = BUILDER
+                .comment("Fraction of the normal attack recovery consumed by Hooking Strike, including misses.")
+                .defineInRange("hook_recovery_consumed", 0.70D, 0.0D, 1.0D);
+        BATTLE_AXE_HOOK_MOVEMENT_MULTIPLIER = BUILDER
+                .comment("Movement multiplier while preparing Hooking Strike.")
+                .defineInRange("hook_movement_multiplier", 0.65D, 0.0D, 1.0D);
         BUILDER.pop();
 
         SPEC = BUILDER.build();

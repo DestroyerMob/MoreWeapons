@@ -4,6 +4,7 @@
   "refmap": "mobsmoreweapons.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "LivingEntityAttackStrengthAccessor",
     "ProjectileAccuracyMixin",
     "SpearAttackMixin"
   ],

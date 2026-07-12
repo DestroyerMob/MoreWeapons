@@ -19,10 +19,12 @@ import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
+import org.destroyermob.mobsmoreweapons.combat.BattleAxeHookSystem;
 import org.destroyermob.mobsmoreweapons.combat.IaiStanceSystem;
 import org.destroyermob.mobsmoreweapons.combat.GreatSwordSweepSystem;
 import org.destroyermob.mobsmoreweapons.entity.ModEntityTypes;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
+import org.destroyermob.mobsmoreweapons.item.BattleAxeItem;
 import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
 import org.destroyermob.mobsmoreweapons.network.ModNetworking;
@@ -47,6 +49,7 @@ public class MoreWeapons {
         NeoForge.EVENT_BUS.addListener(IaiStanceSystem::applyDamage);
         NeoForge.EVENT_BUS.addListener(IaiStanceSystem::finishAttack);
         NeoForge.EVENT_BUS.addListener(GreatSwordSweepSystem::tickPlayer);
+        NeoForge.EVENT_BUS.addListener(BattleAxeHookSystem::tickPlayer);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -107,7 +110,8 @@ public class MoreWeapons {
 
     @SubscribeEvent
     public void onAttackEntity(AttackEntityEvent event) {
-        if (GreatSwordSweepSystem.blocksAttack(event.getEntity())) {
+        if (GreatSwordSweepSystem.blocksAttack(event.getEntity())
+                || BattleAxeHookSystem.blocksAttack(event.getEntity())) {
             event.setCanceled(true);
             return;
         }
@@ -120,12 +124,32 @@ public class MoreWeapons {
     }
 
     @SubscribeEvent
-    public void addGreatSwordSweepDamage(ItemAttributeModifierEvent event) {
+    public void addWeaponAttributes(ItemAttributeModifierEvent event) {
         if (event.getItemStack().getItem() instanceof GreatSwordItem) {
             event.addModifier(
                     Attributes.SWEEPING_DAMAGE_RATIO,
                     new AttributeModifier(
                             GreatSwordItem.SWEEP_DAMAGE_MODIFIER_ID,
+                            0.25D,
+                            AttributeModifier.Operation.ADD_VALUE
+                    ),
+                    EquipmentSlotGroup.MAINHAND
+            );
+            event.addModifier(
+                    Attributes.ENTITY_INTERACTION_RANGE,
+                    new AttributeModifier(
+                            GreatSwordItem.REACH_MODIFIER_ID,
+                            1.0D,
+                            AttributeModifier.Operation.ADD_VALUE
+                    ),
+                    EquipmentSlotGroup.MAINHAND
+            );
+        }
+        if (event.getItemStack().getItem() instanceof BattleAxeItem) {
+            event.addModifier(
+                    Attributes.ATTACK_KNOCKBACK,
+                    new AttributeModifier(
+                            BattleAxeItem.KNOCKBACK_MODIFIER_ID,
                             0.25D,
                             AttributeModifier.Operation.ADD_VALUE
                     ),

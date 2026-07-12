@@ -64,7 +64,7 @@ public class KnifeItem extends SwordItem {
             EquipmentSlot slot = LivingEntity.getSlotForHand(hand);
             stack.hurtAndBreak(1, player, slot);
 
-            ThrownKnife thrownKnife = new ThrownKnife(level, player, stack, thrownDamage(charge));
+            ThrownKnife thrownKnife = new ThrownKnife(level, player, stack, thrownDamage(charge), hand);
             thrownKnife.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, throwVelocity(charge), 1.0F);
             if (player.hasInfiniteMaterials()) {
                 thrownKnife.pickup = net.minecraft.world.entity.projectile.AbstractArrow.Pickup.CREATIVE_ONLY;
