@@ -17,22 +17,23 @@ import org.destroyermob.mobsmoreweapons.item.tier.ModTiers;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MoreWeapons.MOD_ID);
+    private static final float GREAT_SWORD_ATTACK_SPEED = -3.625F;
     private static final ResourceLocation KATANA_REACH_ID = ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "katana_reach");
     private static final ResourceLocation KNIFE_REACH_ID = ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "knife_reach");
 
     // Greatswords
     public static final DeferredItem<Item> WOODENGREATSWORD = ITEMS.register("wooden_great_sword",
-            () -> new GreatSwordItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 12, -3.5f)));
+            () -> new GreatSwordItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 12, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> STONEGREATSWORD = ITEMS.register("stone_great_sword",
-            () -> new GreatSwordItem(Tiers.STONE, weaponProperties(Tiers.STONE, 12, -3.5f)));
+            () -> new GreatSwordItem(Tiers.STONE, weaponProperties(Tiers.STONE, 12, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> IRONGREATSWORD = ITEMS.register("iron_great_sword",
-            () -> new GreatSwordItem(Tiers.IRON, weaponProperties(Tiers.IRON, 12, -3.5f)));
+            () -> new GreatSwordItem(Tiers.IRON, weaponProperties(Tiers.IRON, 12, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> GOLDGREATSWORD = ITEMS.register("golden_great_sword",
-            () -> new GreatSwordItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 12, -3.5f)));
+            () -> new GreatSwordItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 12, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> DIAMONDGREATSWORD = ITEMS.register("diamond_great_sword",
-            () -> new GreatSwordItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 12, -3.5f)));
+            () -> new GreatSwordItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 12, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> NETHERITEGREATSWORD = ITEMS.register("netherite_great_sword",
-            () -> new GreatSwordItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 12, -3.5f)));
+            () -> new GreatSwordItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 12, GREAT_SWORD_ATTACK_SPEED)));
 
     // Katanas
     public static final DeferredItem<Item> WOODENKATANA = ITEMS.register("wooden_katana",

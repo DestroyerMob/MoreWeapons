@@ -2,6 +2,9 @@ package org.destroyermob.mobsmoreweapons;
 
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.EventPriority;
@@ -11,13 +14,16 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
 import org.destroyermob.mobsmoreweapons.combat.IaiStanceSystem;
+import org.destroyermob.mobsmoreweapons.combat.GreatSwordSweepSystem;
 import org.destroyermob.mobsmoreweapons.entity.ModEntityTypes;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
+import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
 import org.destroyermob.mobsmoreweapons.network.ModNetworking;
 
@@ -40,6 +46,7 @@ public class MoreWeapons {
         NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, IaiStanceSystem::prepareAttack);
         NeoForge.EVENT_BUS.addListener(IaiStanceSystem::applyDamage);
         NeoForge.EVENT_BUS.addListener(IaiStanceSystem::finishAttack);
+        NeoForge.EVENT_BUS.addListener(GreatSwordSweepSystem::tickPlayer);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -100,11 +107,30 @@ public class MoreWeapons {
 
     @SubscribeEvent
     public void onAttackEntity(AttackEntityEvent event) {
+        if (GreatSwordSweepSystem.blocksAttack(event.getEntity())) {
+            event.setCanceled(true);
+            return;
+        }
         ItemStack weapon = event.getEntity().getMainHandItem();
         if (SpearItem.isSpear(weapon)
                 && (event.getEntity().getAttackStrengthScale(0.5F) < 1.0F
                 || !SpearItem.isValidJabTarget(event.getEntity(), event.getTarget()))) {
             event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void addGreatSwordSweepDamage(ItemAttributeModifierEvent event) {
+        if (event.getItemStack().getItem() instanceof GreatSwordItem) {
+            event.addModifier(
+                    Attributes.SWEEPING_DAMAGE_RATIO,
+                    new AttributeModifier(
+                            GreatSwordItem.SWEEP_DAMAGE_MODIFIER_ID,
+                            0.25D,
+                            AttributeModifier.Operation.ADD_VALUE
+                    ),
+                    EquipmentSlotGroup.MAINHAND
+            );
         }
     }
 

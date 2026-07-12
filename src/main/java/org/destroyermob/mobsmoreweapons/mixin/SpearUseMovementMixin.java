@@ -1,9 +1,12 @@
 package org.destroyermob.mobsmoreweapons.mixin;
 
 import net.minecraft.client.player.LocalPlayer;
+import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** Backports 1.21.11 spear use_effects: full movement speed and sprinting while charging. */
@@ -15,5 +18,11 @@ public abstract class SpearUseMovementMixin {
     )
     private boolean mobsmoreweapons$allowMovementWhileCharging(LocalPlayer player) {
         return player.isUsingItem() && !SpearItem.isSpear(player.getUseItem());
+    }
+
+    @ModifyConstant(method = "aiStep", constant = @Constant(floatValue = 0.2F))
+    private float mobsmoreweapons$greatSwordBraceMovement(float original) {
+        LocalPlayer player = (LocalPlayer) (Object) this;
+        return player.isUsingItem() && player.getUseItem().getItem() instanceof GreatSwordItem ? 0.4F : original;
     }
 }
