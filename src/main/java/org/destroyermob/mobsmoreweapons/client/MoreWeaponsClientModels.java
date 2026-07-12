@@ -9,7 +9,9 @@ import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import org.destroyermob.mobsmoreweapons.MoreWeapons;
+import org.destroyermob.mobsmoreweapons.entity.ModEntityTypes;
 
 @EventBusSubscriber(modid = MoreWeapons.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public final class MoreWeaponsClientModels {
@@ -19,6 +21,11 @@ public final class MoreWeaponsClientModels {
     );
 
     private MoreWeaponsClientModels() {
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ModEntityTypes.THROWN_KNIFE.get(), ThrownKnifeRenderer::new);
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

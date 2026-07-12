@@ -15,8 +15,11 @@ import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
+import org.destroyermob.mobsmoreweapons.combat.IaiStanceSystem;
+import org.destroyermob.mobsmoreweapons.entity.ModEntityTypes;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
+import org.destroyermob.mobsmoreweapons.network.ModNetworking;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreWeapons.MOD_ID)
@@ -28,9 +31,15 @@ public class MoreWeapons {
     public MoreWeapons(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, MoreWeaponsConfig.SPEC);
         ModItems.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
+        modEventBus.addListener(ModNetworking::registerPayloads);
 
         // Register ourselves for server and other game events we are interested in
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.addListener(IaiStanceSystem::tickPlayer);
+        NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, IaiStanceSystem::prepareAttack);
+        NeoForge.EVENT_BUS.addListener(IaiStanceSystem::applyDamage);
+        NeoForge.EVENT_BUS.addListener(IaiStanceSystem::finishAttack);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

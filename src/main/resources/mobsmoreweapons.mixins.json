@@ -8,6 +8,9 @@
     "SpearAttackMixin"
   ],
   "client": [
+    "PunchyKatanaStanceMixin",
+    "PunchySpearStateMachineMixin",
+    "PunchyTridentStateMachineMixin",
     "SpearUseMovementMixin"
   ],
   "injectors": {
