@@ -5,10 +5,10 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "LivingEntityAttackStrengthAccessor",
-    "ProjectileAccuracyMixin",
-    "SpearAttackMixin"
+    "ProjectileAccuracyMixin"
   ],
   "client": [
+    "MinecraftSpearAttackMixin",
     "PunchyGreatSwordComboMixin",
     "PunchyKatanaStanceMixin",
     "PunchySpearStateMachineMixin",

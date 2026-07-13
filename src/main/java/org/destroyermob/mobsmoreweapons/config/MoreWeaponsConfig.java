@@ -31,8 +31,8 @@ public final class MoreWeaponsConfig {
 
         BUILDER.push("katana");
         IAI_CHARGE_TICKS = BUILDER
-                .comment("Ticks the Iaijutsu stance must charge after the normal attack cooldown is full.")
-                .defineInRange("iai_charge_ticks", 40, 1, 72000);
+                .comment("Ticks the Iaijutsu stance must be held before it is ready. The normal attack cooldown must also be full.")
+                .defineInRange("iai_charge_ticks", 20, 1, 72000);
         IAI_PRIMED_TICKS = BUILDER
                 .comment("Ticks after releasing the stance during which the next katana attack is a quickdraw strike.")
                 .defineInRange("iai_primed_ticks", 20, 1, 200);

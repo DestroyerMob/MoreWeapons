@@ -32,6 +32,9 @@ public class KatanaItem extends SwordItem {
         if (hand != InteractionHand.MAIN_HAND) {
             return InteractionResultHolder.fail(stack);
         }
+        // Entering the stance wins over sprinting. Cancelling one tick later leaves
+        // a held use key unable to retry and makes the transition appear to fail.
+        player.setSprinting(false);
         player.startUsingItem(hand);
         if (!level.isClientSide) {
             IaiStanceSystem.beginStance(player, stack);

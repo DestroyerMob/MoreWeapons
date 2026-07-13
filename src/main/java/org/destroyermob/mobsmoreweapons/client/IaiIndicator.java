@@ -6,7 +6,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -69,8 +68,7 @@ public final class IaiIndicator {
     }
 
     private static void renderAttackIndicatorProgress(GuiGraphics graphics, Minecraft minecraft, double progress) {
-        if (minecraft.options.attackIndicator().get() != AttackIndicatorStatus.CROSSHAIR
-                || !vanillaAttackIndicatorVisible(minecraft)) {
+        if (minecraft.options.attackIndicator().get() != AttackIndicatorStatus.CROSSHAIR) {
             return;
         }
 
@@ -92,16 +90,6 @@ public final class IaiIndicator {
                 progressWidth,
                 INDICATOR_HEIGHT
         );
-    }
-
-    private static boolean vanillaAttackIndicatorVisible(Minecraft minecraft) {
-        float attackStrength = minecraft.player.getAttackStrengthScale(0.0F);
-        if (attackStrength < 1.0F) {
-            return true;
-        }
-        return minecraft.crosshairPickEntity instanceof LivingEntity target
-                && target.isAlive()
-                && minecraft.player.getCurrentItemAttackStrengthDelay() > 5.0F;
     }
 
     private static void clear(ClientLevel level) {

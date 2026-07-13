@@ -30,8 +30,17 @@ public final class IaiStanceSystem {
         if (!(player instanceof ServerPlayer serverPlayer) || !(weapon.getItem() instanceof KatanaItem)) {
             return;
         }
-        IaiState state = new IaiState(player.getInventory().selected, weapon);
+        serverPlayer.setSprinting(false);
+        IaiState existing = STATES.get(player);
+        if (existing != null
+                && existing.using
+                && existing.selectedSlot == player.getInventory().selected) {
+            sendState(serverPlayer, existing, true);
+            return;
+        }
+        IaiState state = new IaiState(player.getInventory().selected);
         state.using = true;
+        state.charging = true;
         STATES.put(player, state);
         sendState(serverPlayer, state, true);
     }
@@ -41,7 +50,10 @@ public final class IaiStanceSystem {
             return;
         }
         IaiState state = STATES.get(player);
-        if (state == null || state.weapon != weapon || !state.using) {
+        if (state == null
+                || !state.using
+                || state.selectedSlot != player.getInventory().selected
+                || !(weapon.getItem() instanceof KatanaItem)) {
             return;
         }
         state.using = false;
@@ -70,22 +82,17 @@ public final class IaiStanceSystem {
 
         ItemStack mainHand = player.getMainHandItem();
         if (player.getInventory().selected != state.selectedSlot
-                || mainHand != state.weapon
                 || !(mainHand.getItem() instanceof KatanaItem)) {
             sendInactive(player);
             STATES.remove(player);
             return;
         }
-
         boolean holdingStance = player.isUsingItem()
                 && player.getUsedItemHand() == net.minecraft.world.InteractionHand.MAIN_HAND
-                && player.getUseItem() == state.weapon;
+                && player.getUseItem().getItem() instanceof KatanaItem;
         if (holdingStance) {
             if (player.isSprinting()) {
-                player.stopUsingItem();
-                sendInactive(player);
-                STATES.remove(player);
-                return;
+                player.setSprinting(false);
             }
             state.using = true;
             state.primedTicks = 0;
@@ -94,7 +101,7 @@ public final class IaiStanceSystem {
         }
 
         if (state.using) {
-            releaseStance(player, state.weapon);
+            releaseStance(player, mainHand);
             state = STATES.get(player);
             if (state == null) {
                 return;
@@ -112,25 +119,18 @@ public final class IaiStanceSystem {
 
     private static void updateCharge(ServerPlayer player, IaiState state) {
         int requiredTicks = MoreWeaponsConfig.IAI_CHARGE_TICKS.get();
-        if (player.getAttackStrengthScale(0.0F) < 1.0F) {
-            if (state.charging || state.chargeTicks > 0 || state.ready) {
-                state.charging = false;
-                state.chargeTicks = 0;
-                state.ready = false;
-                sendState(player, state, true);
-            }
-            return;
-        }
         if (!state.charging) {
             state.charging = true;
             sendState(player, state, true);
         }
         if (!state.ready && state.chargeTicks < requiredTicks) {
             state.chargeTicks++;
-            if (state.chargeTicks >= requiredTicks) {
-                state.ready = true;
-                sendState(player, state, true);
-            }
+        }
+        if (!state.ready
+                && state.chargeTicks >= requiredTicks
+                && player.getAttackStrengthScale(0.0F) >= 1.0F) {
+            state.ready = true;
+            sendState(player, state, true);
         }
     }
 
@@ -140,7 +140,7 @@ public final class IaiStanceSystem {
         }
         IaiState state = STATES.get(player);
         if (state == null || state.primedTicks <= 0 || !state.ready
-                || player.getMainHandItem() != state.weapon
+                || player.getInventory().selected != state.selectedSlot
                 || !(player.getMainHandItem().getItem() instanceof KatanaItem)) {
             return;
         }
@@ -256,7 +256,6 @@ public final class IaiStanceSystem {
 
     private static final class IaiState {
         private final int selectedSlot;
-        private final ItemStack weapon;
         private boolean using;
         private boolean charging;
         private boolean ready;
@@ -266,9 +265,8 @@ public final class IaiStanceSystem {
         private int strikeTicks;
         private boolean damageApplied;
 
-        private IaiState(int selectedSlot, ItemStack weapon) {
+        private IaiState(int selectedSlot) {
             this.selectedSlot = selectedSlot;
-            this.weapon = weapon;
         }
     }
 }

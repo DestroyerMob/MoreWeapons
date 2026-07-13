@@ -1,7 +1,6 @@
 package org.destroyermob.mobsmoreweapons;
 
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -16,7 +15,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
-import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
 import org.destroyermob.mobsmoreweapons.combat.BattleAxeHookSystem;
@@ -26,7 +24,6 @@ import org.destroyermob.mobsmoreweapons.entity.ModEntityTypes;
 import org.destroyermob.mobsmoreweapons.item.ModItems;
 import org.destroyermob.mobsmoreweapons.item.BattleAxeItem;
 import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
-import org.destroyermob.mobsmoreweapons.item.SpearItem;
 import org.destroyermob.mobsmoreweapons.item.tier.ModArmorMaterials;
 import org.destroyermob.mobsmoreweapons.network.ModNetworking;
 import org.destroyermob.mobsmoreweapons.registry.ModSoundEvents;
@@ -130,13 +127,6 @@ public class MoreWeapons {
         if (GreatSwordSweepSystem.blocksAttack(event.getEntity())
                 || BattleAxeHookSystem.blocksAttack(event.getEntity())) {
             event.setCanceled(true);
-            return;
-        }
-        ItemStack weapon = event.getEntity().getMainHandItem();
-        if (SpearItem.isSpear(weapon)
-                && (event.getEntity().getAttackStrengthScale(0.5F) < 1.0F
-                || !SpearItem.isValidJabTarget(event.getEntity(), event.getTarget()))) {
-            event.setCanceled(true);
         }
     }
 
@@ -172,14 +162,6 @@ public class MoreWeapons {
                     ),
                     EquipmentSlotGroup.MAINHAND
             );
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onCriticalHit(CriticalHitEvent event) {
-        if (SpearItem.isSpear(event.getEntity().getMainHandItem())) {
-            event.setCriticalHit(false);
-            event.setDamageMultiplier(1.0F);
         }
     }
 
