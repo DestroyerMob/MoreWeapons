@@ -32,7 +32,9 @@ public class BattleAxeItem extends SwordItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.SPEAR;
+        // The held pose and release swing are supplied by Better Combat's
+        // Player Animator clips; reporting SPEAR here lets Punchy replace them.
+        return UseAnim.NONE;
     }
 
     @Override

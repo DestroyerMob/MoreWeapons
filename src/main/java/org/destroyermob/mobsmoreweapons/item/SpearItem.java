@@ -2,10 +2,8 @@ package org.destroyermob.mobsmoreweapons.item;
 
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.OptionalDouble;
-import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.core.registries.Registries;
@@ -15,6 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -35,7 +34,9 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.destroyermob.mobsmoreweapons.MoreWeapons;
 import org.destroyermob.mobsmoreweapons.item.tier.ModTiers;
@@ -45,10 +46,11 @@ public class SpearItem extends SwordItem {
     public static final double MINIMUM_ATTACK_RANGE = 2.0D;
     public static final double MAXIMUM_ATTACK_RANGE = 4.5D;
     public static final double HITBOX_MARGIN = 0.125D;
+    // Exact vanilla 1.21.11 kinetic-spear thresholds.
     private static final double MINIMUM_DAMAGE_RELATIVE_SPEED = 4.6D;
     private static final double MINIMUM_KNOCKBACK_RELATIVE_SPEED = 5.1D;
     private static final int CONTACT_COOLDOWN_TICKS = 10;
-    private static final Map<UUID, Map<Integer, ChargeContact>> CHARGE_CONTACTS = new ConcurrentHashMap<>();
+    private static final Map<UUID, Map<Integer, Long>> CHARGE_CONTACTS = new ConcurrentHashMap<>();
     public static final TagKey<net.minecraft.world.item.Item> SPEARS = TagKey.create(
             Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "spears")
@@ -121,52 +123,52 @@ public class SpearItem extends SwordItem {
         }
 
         long gameTime = level.getGameTime();
-        Map<Integer, ChargeContact> contacts = CHARGE_CONTACTS.computeIfAbsent(player.getUUID(), ignored -> new HashMap<>());
-        java.util.List<Entity> targets = targetsAlongSpear(player);
-        Set<Integer> currentContacts = new HashSet<>();
-        for (Entity target : targets) {
-            currentContacts.add(target.getId());
-        }
-        contacts.forEach((id, contact) -> {
-            if (!currentContacts.contains(id)) {
-                contact.inContact = false;
-                contact.hitDuringContact = false;
-            }
-        });
-
+        Map<Integer, Long> contacts = CHARGE_CONTACTS.computeIfAbsent(player.getUUID(), ignored -> new HashMap<>());
         Vec3 view = player.getLookAngle().normalize();
-        Vec3 attackerVelocity = effectiveVelocity(player);
-        double attackerSpeed = Math.max(0.0D, attackerVelocity.dot(view) * 20.0D);
-        for (Entity target : targets) {
-            ChargeContact contact = contacts.computeIfAbsent(target.getId(), ignored -> new ChargeContact());
-            contact.inContact = true;
-            if (gameTime - contact.lastHitTick < CONTACT_COOLDOWN_TICKS) {
+        Vec3 attackerMovement = amplifiedKineticMovement(player);
+        double attackerSpeed = view.dot(attackerMovement);
+        double baseAttackDamage = player.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+        int activeTicks = elapsed - profile.startupTicks();
+
+        for (Entity target : targetsAlongSpear(player, MINIMUM_ATTACK_RANGE)) {
+            long lastContact = contacts.getOrDefault(target.getId(), Long.MIN_VALUE / 2L);
+            if (gameTime - lastContact < CONTACT_COOLDOWN_TICKS) {
                 continue;
             }
-            if (contact.hitDuringContact) {
+            // Vanilla starts the cooldown before evaluating the three conditions.
+            contacts.put(target.getId(), gameTime);
+
+            double targetSpeed = view.dot(amplifiedKineticMovement(target));
+            double relativeSpeed = Math.max(0.0D, attackerSpeed - targetSpeed);
+            boolean dismount = activeTicks <= profile.dismountMaximumTicks()
+                    && attackerSpeed >= profile.dismountSpeed();
+            boolean knockback = activeTicks <= profile.knockbackMaximumTicks()
+                    && relativeSpeed >= MINIMUM_KNOCKBACK_RELATIVE_SPEED;
+            boolean dealDamage = activeTicks <= profile.damageMaximumTicks()
+                    && relativeSpeed >= MINIMUM_DAMAGE_RELATIVE_SPEED;
+            if (!dismount && !knockback && !dealDamage) {
                 continue;
             }
 
-            double relativeSpeed = Math.max(0.0D, attackerVelocity.subtract(effectiveVelocity(target)).dot(view) * 20.0D);
-            if (relativeSpeed < MINIMUM_DAMAGE_RELATIVE_SPEED) {
-                continue;
-            }
-
-            contact.hitDuringContact = true;
-            contact.lastHitTick = gameTime;
-            float damage = (float) Math.floor(profile.damageMultiplier() * relativeSpeed);
             DamageSource source = player.damageSources().playerAttack(player);
-            damage = EnchantmentHelper.modifyDamage(serverLevel, stack, target, source, damage);
-            boolean damaged = target.hurt(source, damage);
-            ChargeStage stage = profile.stage(elapsed);
-            if (stage != ChargeStage.DISENGAGED && relativeSpeed >= MINIMUM_KNOCKBACK_RELATIVE_SPEED) {
-                knockBackChargeTarget(serverLevel, stack, player, target, source, attackerVelocity.subtract(effectiveVelocity(target)));
+            boolean damaged = false;
+            if (dealDamage) {
+                float damage = (float) baseAttackDamage + Mth.floor(relativeSpeed * profile.damageMultiplier());
+                damage = EnchantmentHelper.modifyDamage(serverLevel, stack, target, source, damage);
+                damaged = target.hurt(source, damage);
             }
-            if (stage == ChargeStage.ENGAGED && attackerSpeed >= profile.dismountSpeed() && target.isPassenger()) {
+            if (knockback) {
+                knockBackChargeTarget(serverLevel, stack, player, target, source);
+            }
+            if (dismount && target.isPassenger()) {
                 target.stopRiding();
             }
             if (damaged) {
                 EnchantmentHelper.doPostAttackEffects(serverLevel, target, source);
+            }
+            // Vanilla calls postHit for any living contact that passed at least one
+            // kinetic condition, including knockback-only and dismount-only hits.
+            if (target instanceof LivingEntity) {
                 stack.hurtAndBreak(1, player, player.getUsedItemHand() == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND);
             }
         }
@@ -215,18 +217,14 @@ public class SpearItem extends SwordItem {
         return stack.getItem() instanceof SpearItem || stack.is(SPEARS);
     }
 
-    private static void knockBackChargeTarget(ServerLevel level, ItemStack stack, Player player, Entity target, DamageSource source, Vec3 relativeVelocity) {
+    private static void knockBackChargeTarget(ServerLevel level, ItemStack stack, Player player, Entity target, DamageSource source) {
+        if (!(target instanceof LivingEntity living)) {
+            return;
+        }
         float enchantmentKnockback = EnchantmentHelper.modifyKnockback(level, stack, target, source, 0.0F);
-        double strength = 0.75D + enchantmentKnockback * 0.5D;
-        Vec3 horizontal = relativeVelocity.multiply(1.0D, 0.0D, 1.0D);
-        if (horizontal.lengthSqr() < 1.0E-7D) {
-            horizontal = player.getLookAngle().multiply(1.0D, 0.0D, 1.0D);
-        }
-        if (horizontal.lengthSqr() > 1.0E-7D) {
-            horizontal = horizontal.normalize().scale(strength);
-            target.push(horizontal.x, target instanceof LivingEntity ? 0.1D : 0.0D, horizontal.z);
-            target.hurtMarked = true;
-        }
+        float yawRadians = player.getYRot() * ((float) Math.PI / 180.0F);
+        living.knockback(0.4F + enchantmentKnockback, Mth.sin(yawRadians), -Mth.cos(yawRadians));
+        player.setDeltaMovement(player.getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
     }
 
     private static void applyHorizontalKnockback(Player player, Entity target, double strength) {
@@ -242,14 +240,36 @@ public class SpearItem extends SwordItem {
     }
 
     private static java.util.List<Entity> targetsAlongSpear(Player player) {
-        Vec3 start = player.getEyePosition();
-        Vec3 end = start.add(player.getLookAngle().normalize().scale(MAXIMUM_ATTACK_RANGE));
-        AABB search = player.getBoundingBox().expandTowards(end.subtract(start)).inflate(1.0D);
+        return targetsAlongSpear(player, MINIMUM_ATTACK_RANGE);
+    }
+
+    private static java.util.List<Entity> targetsAlongSpear(Player player, double minimumAttackRange) {
+        Vec3 look = player.getLookAngle().normalize();
+        Vec3 eye = player.getEyePosition();
+        Vec3 start = eye.add(look.scale(minimumAttackRange));
+        double movementExtension = Math.max(0.0D, lastTickMovement(player).dot(look));
+        Vec3 maximumEnd = eye.add(look.scale(MAXIMUM_ATTACK_RANGE + movementExtension));
+        HitResult blockHit = player.level().clip(new ClipContext(
+                eye,
+                maximumEnd,
+                ClipContext.Block.COLLIDER,
+                ClipContext.Fluid.NONE,
+                player
+        ));
+        Vec3 end = blockHit.getType() == HitResult.Type.MISS ? maximumEnd : blockHit.getLocation();
+        if (eye.distanceToSqr(end) < eye.distanceToSqr(start)) {
+            return java.util.List.of();
+        }
+
+        AABB search = new AABB(start, start)
+                .inflate(HITBOX_MARGIN * 0.5D)
+                .expandTowards(end.subtract(start))
+                .inflate(1.0D);
         return player.level().getEntities(player, search, target -> isAttackableBy(player, target))
                 .stream()
                 .filter(target -> distanceAlongSpear(start, end, target)
                         .stream()
-                        .anyMatch(distance -> distance >= MINIMUM_ATTACK_RANGE && distance <= MAXIMUM_ATTACK_RANGE))
+                        .anyMatch(distance -> distance <= start.distanceTo(end) + HITBOX_MARGIN))
                 .sorted(Comparator.comparingDouble(target -> distanceAlongSpear(start, end, target).orElse(Double.MAX_VALUE)))
                 .toList();
     }
@@ -272,18 +292,24 @@ public class SpearItem extends SwordItem {
 
     private ChargeProfile profile() {
         Tier tier = getTier();
-        if (tier == Tiers.NETHERITE) return new ChargeProfile(1.2D, 8, 50, 60, 65, 9.0D);
-        if (tier == Tiers.DIAMOND) return new ChargeProfile(1.075D, 10, 60, 70, 70, 10.0D);
-        if (tier == Tiers.IRON) return new ChargeProfile(0.95D, 12, 50, 85, 90, 11.0D);
-        if (tier == Tiers.GOLD) return new ChargeProfile(0.7D, 14, 70, 100, 105, 13.0D);
-        if (tier == ModTiers.COPPER) return new ChargeProfile(0.82D, 13, 80, 85, 85, 12.0D);
-        if (tier == Tiers.STONE) return new ChargeProfile(0.82D, 14, 90, 90, 95, 13.0D);
-        return new ChargeProfile(0.7D, 15, 100, 100, 100, 14.0D);
+        if (tier == Tiers.NETHERITE) return new ChargeProfile(1.2D, 8, 50, 110, 175, 7.0D);
+        if (tier == Tiers.DIAMOND) return new ChargeProfile(1.075D, 10, 60, 130, 200, 7.5D);
+        if (tier == Tiers.IRON) return new ChargeProfile(0.95D, 12, 50, 135, 225, 8.0D);
+        if (tier == Tiers.GOLD) return new ChargeProfile(0.7D, 14, 70, 170, 275, 10.0D);
+        if (tier == ModTiers.COPPER) return new ChargeProfile(0.82D, 13, 80, 165, 250, 9.0D);
+        if (tier == Tiers.STONE) return new ChargeProfile(0.82D, 14, 90, 180, 275, 10.0D);
+        return new ChargeProfile(0.7D, 15, 100, 200, 300, 14.0D);
     }
 
-    private static Vec3 effectiveVelocity(Entity entity) {
-        Entity vehicle = entity.getVehicle();
-        return vehicle == null ? entity.getDeltaMovement() : vehicle.getDeltaMovement();
+    private static Vec3 amplifiedKineticMovement(Entity entity) {
+        if (!(entity instanceof Player) && entity.isPassenger()) {
+            entity = entity.getRootVehicle();
+        }
+        return lastTickMovement(entity).scale(20.0D);
+    }
+
+    private static Vec3 lastTickMovement(Entity entity) {
+        return entity.position().subtract(new Vec3(entity.xo, entity.yo, entity.zo));
     }
 
     private static void applyLunge(ItemStack stack, Player player) {
@@ -310,24 +336,16 @@ public class SpearItem extends SwordItem {
         };
     }
 
-    private enum ChargeStage { ENGAGED, TIRED, DISENGAGED }
-
-    private record ChargeProfile(double damageMultiplier, int startupTicks, int engagedTicks, int tiredTicks, int disengagedTicks, double dismountSpeed) {
-        ChargeStage stage(int elapsed) {
-            int active = elapsed - startupTicks;
-            if (active < engagedTicks) return ChargeStage.ENGAGED;
-            if (active < engagedTicks + tiredTicks) return ChargeStage.TIRED;
-            return ChargeStage.DISENGAGED;
-        }
-
+    private record ChargeProfile(
+            double damageMultiplier,
+            int startupTicks,
+            int dismountMaximumTicks,
+            int knockbackMaximumTicks,
+            int damageMaximumTicks,
+            double dismountSpeed
+    ) {
         int totalUseTicks() {
-            return startupTicks + engagedTicks + tiredTicks + disengagedTicks;
+            return startupTicks + damageMaximumTicks;
         }
-    }
-
-    private static final class ChargeContact {
-        private long lastHitTick = Long.MIN_VALUE / 2L;
-        private boolean inContact;
-        private boolean hitDuringContact;
     }
 }
