@@ -22,8 +22,10 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.destroyermob.mobsmoreweapons.MoreWeapons;
 import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
+import org.destroyermob.mobsmoreweapons.network.GreatSwordSweepAnimationPayload;
 
 /** Server-authoritative windup, strike, and shared recovery for the greatsword sweep. */
 public final class GreatSwordSweepSystem {
@@ -85,6 +87,7 @@ public final class GreatSwordSweepSystem {
         removeBracingResistance(player);
         state.charging = false;
         performSweep(serverPlayer, weapon);
+        PacketDistributor.sendToPlayer(serverPlayer, GreatSwordSweepAnimationPayload.INSTANCE);
 
         int recoveryTicks = Math.max(
                 1,

@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "mobsmoreweapons:copper_sword",
+    "mobsmoreweapons:copper_shovel",
+    "mobsmoreweapons:copper_pickaxe",
+    "mobsmoreweapons:copper_axe",
+    "mobsmoreweapons:copper_hoe",
+    "mobsmoreweapons:copper_helmet",
+    "mobsmoreweapons:copper_chestplate",
+    "mobsmoreweapons:copper_leggings",
+    "mobsmoreweapons:copper_boots",
+    "mobsmoreweapons:copper_spear",
+    "mobsmoreweapons:copper_spear_head"
+  ]
+}

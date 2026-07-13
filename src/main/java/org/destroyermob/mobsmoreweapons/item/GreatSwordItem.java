@@ -31,7 +31,7 @@ public class GreatSwordItem extends SwordItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BLOCK;
+        return UseAnim.NONE;
     }
 
     @Override

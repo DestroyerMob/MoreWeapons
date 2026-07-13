@@ -6,12 +6,54 @@
     "mobsmoreweapons:golden_battle_axe": { "kind": "SWORD", "armKind": "SWORD" },
     "mobsmoreweapons:diamond_battle_axe": { "kind": "SWORD", "armKind": "SWORD" },
     "mobsmoreweapons:netherite_battle_axe": { "kind": "SWORD", "armKind": "SWORD" },
-    "mobsmoreweapons:wooden_great_sword": { "kind": "SWORD", "armKind": "SWORD" },
-    "mobsmoreweapons:stone_great_sword": { "kind": "SWORD", "armKind": "SWORD" },
-    "mobsmoreweapons:iron_great_sword": { "kind": "SWORD", "armKind": "SWORD" },
-    "mobsmoreweapons:golden_great_sword": { "kind": "SWORD", "armKind": "SWORD" },
-    "mobsmoreweapons:diamond_great_sword": { "kind": "SWORD", "armKind": "SWORD" },
-    "mobsmoreweapons:netherite_great_sword": { "kind": "SWORD", "armKind": "SWORD" },
+    "mobsmoreweapons:wooden_great_sword": {
+      "kind": "SWORD",
+      "armKind": "SWORD",
+      "customAnimation": [
+        { "type": "attack", "var_1": "attack_1", "var_2": "attack_2", "critical_hit": "attack_1" },
+        { "type": "useitem", "name": "mobsmoreweapons_greatsword_charge" }
+      ]
+    },
+    "mobsmoreweapons:stone_great_sword": {
+      "kind": "SWORD",
+      "armKind": "SWORD",
+      "customAnimation": [
+        { "type": "attack", "var_1": "attack_1", "var_2": "attack_2", "critical_hit": "attack_1" },
+        { "type": "useitem", "name": "mobsmoreweapons_greatsword_charge" }
+      ]
+    },
+    "mobsmoreweapons:iron_great_sword": {
+      "kind": "SWORD",
+      "armKind": "SWORD",
+      "customAnimation": [
+        { "type": "attack", "var_1": "attack_1", "var_2": "attack_2", "critical_hit": "attack_1" },
+        { "type": "useitem", "name": "mobsmoreweapons_greatsword_charge" }
+      ]
+    },
+    "mobsmoreweapons:golden_great_sword": {
+      "kind": "SWORD",
+      "armKind": "SWORD",
+      "customAnimation": [
+        { "type": "attack", "var_1": "attack_1", "var_2": "attack_2", "critical_hit": "attack_1" },
+        { "type": "useitem", "name": "mobsmoreweapons_greatsword_charge" }
+      ]
+    },
+    "mobsmoreweapons:diamond_great_sword": {
+      "kind": "SWORD",
+      "armKind": "SWORD",
+      "customAnimation": [
+        { "type": "attack", "var_1": "attack_1", "var_2": "attack_2", "critical_hit": "attack_1" },
+        { "type": "useitem", "name": "mobsmoreweapons_greatsword_charge" }
+      ]
+    },
+    "mobsmoreweapons:netherite_great_sword": {
+      "kind": "SWORD",
+      "armKind": "SWORD",
+      "customAnimation": [
+        { "type": "attack", "var_1": "attack_1", "var_2": "attack_2", "critical_hit": "attack_1" },
+        { "type": "useitem", "name": "mobsmoreweapons_greatsword_charge" }
+      ]
+    },
     "mobsmoreweapons:wooden_katana": { "kind": "SWORD", "armKind": "SWORD" },
     "mobsmoreweapons:stone_katana": { "kind": "SWORD", "armKind": "SWORD" },
     "mobsmoreweapons:iron_katana": { "kind": "SWORD", "armKind": "SWORD" },

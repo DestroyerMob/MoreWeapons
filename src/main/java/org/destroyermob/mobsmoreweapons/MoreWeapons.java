@@ -27,7 +27,9 @@ import org.destroyermob.mobsmoreweapons.item.ModItems;
 import org.destroyermob.mobsmoreweapons.item.BattleAxeItem;
 import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
+import org.destroyermob.mobsmoreweapons.item.tier.ModArmorMaterials;
 import org.destroyermob.mobsmoreweapons.network.ModNetworking;
+import org.destroyermob.mobsmoreweapons.registry.ModSoundEvents;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreWeapons.MOD_ID)
@@ -38,6 +40,8 @@ public class MoreWeapons {
 
     public MoreWeapons(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, MoreWeaponsConfig.SPEC);
+        ModSoundEvents.register(modEventBus);
+        ModArmorMaterials.register(modEventBus);
         ModItems.register(modEventBus);
         ModEntityTypes.register(modEventBus);
         modEventBus.addListener(ModNetworking::registerPayloads);
@@ -57,6 +61,13 @@ public class MoreWeapons {
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.COMBAT) {
+            event.accept(ModItems.COPPER_SWORD);
+            event.accept(ModItems.COPPER_AXE);
+            event.accept(ModItems.COPPER_HELMET);
+            event.accept(ModItems.COPPER_CHESTPLATE);
+            event.accept(ModItems.COPPER_LEGGINGS);
+            event.accept(ModItems.COPPER_BOOTS);
+
             // Greatswords
             event.accept(ModItems.WOODENGREATSWORD);
             event.accept(ModItems.STONEGREATSWORD);
@@ -105,6 +116,12 @@ public class MoreWeapons {
             event.accept(ModItems.GOLDENSPEAR);
             event.accept(ModItems.DIAMONDSPEAR);
             event.accept(ModItems.NETHERITESPEAR);
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.COPPER_SHOVEL);
+            event.accept(ModItems.COPPER_PICKAXE);
+            event.accept(ModItems.COPPER_AXE);
+            event.accept(ModItems.COPPER_HOE);
         }
     }
 

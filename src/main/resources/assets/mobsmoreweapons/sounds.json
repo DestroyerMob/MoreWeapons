@@ -1,0 +1,13 @@
+{
+  "item.armor.equip_copper": {
+    "subtitle": "subtitles.item.armor.equip_copper",
+    "sounds": [
+      "mobsmoreweapons:item/armor/equip_copper1",
+      "mobsmoreweapons:item/armor/equip_copper2",
+      "mobsmoreweapons:item/armor/equip_copper3",
+      "mobsmoreweapons:item/armor/equip_copper4",
+      "mobsmoreweapons:item/armor/equip_copper5",
+      "mobsmoreweapons:item/armor/equip_copper6"
+    ]
+  }
+}

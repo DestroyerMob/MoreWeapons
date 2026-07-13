@@ -5,6 +5,12 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.DiggerItem;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.PickaxeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
@@ -13,27 +19,46 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.destroyermob.mobsmoreweapons.MoreWeapons;
+import org.destroyermob.mobsmoreweapons.item.tier.ModArmorMaterials;
 import org.destroyermob.mobsmoreweapons.item.tier.ModTiers;
 
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MoreWeapons.MOD_ID);
+    // 0.375 attacks/second after the player's base 4.0 attack speed is applied,
+    // for a full vanilla recharge time of 53.33 ticks.
     private static final float GREAT_SWORD_ATTACK_SPEED = -3.625F;
     private static final ResourceLocation KATANA_REACH_ID = ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "katana_reach");
     private static final ResourceLocation KNIFE_REACH_ID = ResourceLocation.fromNamespaceAndPath(MoreWeapons.MOD_ID, "knife_reach");
 
+    // Copper equipment backported from later vanilla releases
+    public static final DeferredItem<Item> COPPER_SWORD = ITEMS.register("copper_sword",
+            () -> new SwordItem(ModTiers.COPPER, weaponProperties(ModTiers.COPPER, 3, -2.4F)));
+    public static final DeferredItem<Item> COPPER_SHOVEL = ITEMS.register("copper_shovel",
+            () -> new ShovelItem(ModTiers.COPPER, toolProperties(ModTiers.COPPER, 1.5F, -3.0F)));
+    public static final DeferredItem<Item> COPPER_PICKAXE = ITEMS.register("copper_pickaxe",
+            () -> new PickaxeItem(ModTiers.COPPER, toolProperties(ModTiers.COPPER, 1.0F, -2.8F)));
+    public static final DeferredItem<Item> COPPER_AXE = ITEMS.register("copper_axe",
+            () -> new AxeItem(ModTiers.COPPER, toolProperties(ModTiers.COPPER, 7.0F, -3.2F)));
+    public static final DeferredItem<Item> COPPER_HOE = ITEMS.register("copper_hoe",
+            () -> new HoeItem(ModTiers.COPPER, toolProperties(ModTiers.COPPER, -1.0F, -2.0F)));
+    public static final DeferredItem<Item> COPPER_HELMET = copperArmor("copper_helmet", ArmorItem.Type.HELMET);
+    public static final DeferredItem<Item> COPPER_CHESTPLATE = copperArmor("copper_chestplate", ArmorItem.Type.CHESTPLATE);
+    public static final DeferredItem<Item> COPPER_LEGGINGS = copperArmor("copper_leggings", ArmorItem.Type.LEGGINGS);
+    public static final DeferredItem<Item> COPPER_BOOTS = copperArmor("copper_boots", ArmorItem.Type.BOOTS);
+
     // Greatswords
     public static final DeferredItem<Item> WOODENGREATSWORD = ITEMS.register("wooden_great_sword",
-            () -> new GreatSwordItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 12, GREAT_SWORD_ATTACK_SPEED)));
+            () -> new GreatSwordItem(Tiers.WOOD, weaponProperties(Tiers.WOOD, 7, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> STONEGREATSWORD = ITEMS.register("stone_great_sword",
-            () -> new GreatSwordItem(Tiers.STONE, weaponProperties(Tiers.STONE, 12, GREAT_SWORD_ATTACK_SPEED)));
+            () -> new GreatSwordItem(Tiers.STONE, weaponProperties(Tiers.STONE, 7, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> IRONGREATSWORD = ITEMS.register("iron_great_sword",
-            () -> new GreatSwordItem(Tiers.IRON, weaponProperties(Tiers.IRON, 12, GREAT_SWORD_ATTACK_SPEED)));
+            () -> new GreatSwordItem(Tiers.IRON, weaponProperties(Tiers.IRON, 7, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> GOLDGREATSWORD = ITEMS.register("golden_great_sword",
-            () -> new GreatSwordItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 12, GREAT_SWORD_ATTACK_SPEED)));
+            () -> new GreatSwordItem(Tiers.GOLD, weaponProperties(Tiers.GOLD, 7, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> DIAMONDGREATSWORD = ITEMS.register("diamond_great_sword",
-            () -> new GreatSwordItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 12, GREAT_SWORD_ATTACK_SPEED)));
+            () -> new GreatSwordItem(Tiers.DIAMOND, weaponProperties(Tiers.DIAMOND, 7, GREAT_SWORD_ATTACK_SPEED)));
     public static final DeferredItem<Item> NETHERITEGREATSWORD = ITEMS.register("netherite_great_sword",
-            () -> new GreatSwordItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 12, GREAT_SWORD_ATTACK_SPEED)));
+            () -> new GreatSwordItem(Tiers.NETHERITE, weaponProperties(Tiers.NETHERITE, 7, GREAT_SWORD_ATTACK_SPEED)));
 
     // Katanas
     public static final DeferredItem<Item> WOODENKATANA = ITEMS.register("wooden_katana",
@@ -144,6 +169,20 @@ public class ModItems {
 
     private static DeferredItem<Item> part(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties()));
+    }
+
+    private static DeferredItem<Item> copperArmor(String name, ArmorItem.Type type) {
+        return ITEMS.register(name, () -> new ArmorItem(
+                ModArmorMaterials.COPPER,
+                type,
+                new Item.Properties().durability(ModArmorMaterials.copperDurability(type))
+        ));
+    }
+
+    private static Item.Properties toolProperties(Tier tier, float attackDamage, float attackSpeed) {
+        return new Item.Properties()
+                .durability(tier.getUses())
+                .attributes(DiggerItem.createAttributes(tier, attackDamage, attackSpeed));
     }
 
     private static Item.Properties weaponProperties(Tier tier, int attackDamage, float attackSpeed) {

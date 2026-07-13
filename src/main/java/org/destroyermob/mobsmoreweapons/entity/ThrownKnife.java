@@ -1,26 +1,32 @@
 package org.destroyermob.mobsmoreweapons.entity;
 
 import javax.annotation.Nullable;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -125,6 +131,7 @@ public final class ThrownKnife extends AbstractArrow implements ItemSupplier {
         if (target.hurt(source, damage)) {
             if (level() instanceof ServerLevel serverLevel && weapon != null) {
                 EnchantmentHelper.doPostAttackEffectsWithItemSource(serverLevel, target, source, weapon);
+                channelLightning(serverLevel, weapon, target.blockPosition());
             }
             if (target instanceof LivingEntity livingTarget) {
                 doKnockback(livingTarget, source);
@@ -134,6 +141,45 @@ public final class ThrownKnife extends AbstractArrow implements ItemSupplier {
 
         setDeltaMovement(getDeltaMovement().multiply(-0.05D, -0.1D, -0.05D));
         playSound(SoundEvents.TRIDENT_HIT_GROUND, 1.0F, 1.35F);
+    }
+
+    @Override
+    protected void hitBlockEnchantmentEffects(ServerLevel level, BlockHitResult result, ItemStack weapon) {
+        Vec3 hitLocation = result.getBlockPos().clampLocationWithin(result.getLocation());
+        EnchantmentHelper.onHitBlock(
+                level,
+                weapon,
+                getOwner() instanceof LivingEntity livingOwner ? livingOwner : null,
+                this,
+                null,
+                hitLocation,
+                level.getBlockState(result.getBlockPos()),
+                ignored -> kill()
+        );
+        if (level.getBlockState(result.getBlockPos()).is(Blocks.LIGHTNING_ROD)) {
+            channelLightning(level, weapon, result.getBlockPos());
+        }
+    }
+
+    private void channelLightning(ServerLevel level, ItemStack weapon, BlockPos strikePosition) {
+        int channelingLevel = level.registryAccess().registryOrThrow(Registries.ENCHANTMENT)
+                .getHolder(Enchantments.CHANNELING)
+                .map(weapon::getEnchantmentLevel)
+                .orElse(0);
+        if (channelingLevel <= 0 || !level.isThundering() || !level.canSeeSky(strikePosition)) {
+            return;
+        }
+
+        LightningBolt lightning = EntityType.LIGHTNING_BOLT.create(level);
+        if (lightning == null) {
+            return;
+        }
+        lightning.moveTo(Vec3.atBottomCenterOf(strikePosition));
+        if (getOwner() instanceof ServerPlayer player) {
+            lightning.setCause(player);
+        }
+        level.addFreshEntity(lightning);
+        level.playSound(null, strikePosition, SoundEvents.TRIDENT_THUNDER.value(), SoundSource.WEATHER, 5.0F, 1.0F);
     }
 
     public void setItem(ItemStack stack) {

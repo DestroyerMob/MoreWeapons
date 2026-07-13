@@ -9,6 +9,7 @@
     "SpearAttackMixin"
   ],
   "client": [
+    "PunchyGreatSwordComboMixin",
     "PunchyKatanaStanceMixin",
     "PunchySpearStateMachineMixin",
     "PunchyTridentStateMachineMixin",
