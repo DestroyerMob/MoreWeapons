@@ -48,9 +48,9 @@ public class SpearItem extends SwordItem {
     public static final double MAXIMUM_ATTACK_RANGE = 4.5D;
     public static final double CREATIVE_MAXIMUM_ATTACK_RANGE = 6.5D;
     public static final double HITBOX_MARGIN = 0.125D;
-    // Exact vanilla 1.21.11 kinetic-spear thresholds.
+    // Exact vanilla 26.2 kinetic-spear thresholds.
     private static final double MINIMUM_DAMAGE_RELATIVE_SPEED = 4.6D;
-    private static final double MINIMUM_KNOCKBACK_RELATIVE_SPEED = 5.1D;
+    private static final double MINIMUM_KNOCKBACK_SPEED = 5.1D;
     private static final int CONTACT_COOLDOWN_TICKS = 10;
     private static final Map<UUID, Map<Integer, Long>> CHARGE_CONTACTS = new ConcurrentHashMap<>();
     public static final TagKey<net.minecraft.world.item.Item> SPEARS = TagKey.create(
@@ -83,7 +83,9 @@ public class SpearItem extends SwordItem {
 
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
-        return profile().totalUseTicks();
+        // Vanilla kinetic weapons remain in use after their damage window
+        // expires; the later animation stages are not the item-use duration.
+        return 72000;
     }
 
     @Override
@@ -94,6 +96,7 @@ public class SpearItem extends SwordItem {
         }
         CHARGE_CONTACTS.remove(player.getUUID());
         player.startUsingItem(hand);
+        MoreWeapons.LOGGER.debug("Started spear charge for {} on {}", player.getScoreboardName(), level.isClientSide ? "client" : "server");
         return InteractionResultHolder.consume(stack);
     }
 
@@ -144,10 +147,17 @@ public class SpearItem extends SwordItem {
             double relativeSpeed = Math.max(0.0D, attackerSpeed - targetSpeed);
             boolean dismount = activeTicks <= profile.dismountMaximumTicks()
                     && attackerSpeed >= profile.dismountSpeed();
+            // Vanilla gates knockback on the attacker's forward speed. Only
+            // damage uses attacker/target relative speed.
             boolean knockback = activeTicks <= profile.knockbackMaximumTicks()
-                    && relativeSpeed >= MINIMUM_KNOCKBACK_RELATIVE_SPEED;
+                    && attackerSpeed >= MINIMUM_KNOCKBACK_SPEED;
             boolean dealDamage = activeTicks <= profile.damageMaximumTicks()
                     && relativeSpeed >= MINIMUM_DAMAGE_RELATIVE_SPEED;
+            MoreWeapons.LOGGER.debug(
+                    "Spear charge contact: player={}, target={}, elapsed={}, attackerSpeed={}, targetSpeed={}, damage={}, knockback={}, dismount={}",
+                    player.getScoreboardName(), target.getStringUUID(), elapsed, attackerSpeed, targetSpeed,
+                    dealDamage, knockback, dismount
+            );
             if (!dismount && !knockback && !dealDamage) {
                 continue;
             }
@@ -164,12 +174,18 @@ public class SpearItem extends SwordItem {
     public static void jab(ServerPlayer player) {
         ItemStack stack = player.getMainHandItem();
         if (player.isSpectator() || !isSpear(stack) || player.getAttackStrengthScale(5.0F) < 1.0F) {
+            MoreWeapons.LOGGER.debug(
+                    "Rejected spear jab: player={}, spectator={}, spear={}, strength={}",
+                    player.getScoreboardName(), player.isSpectator(), isSpear(stack), player.getAttackStrengthScale(5.0F)
+            );
             return;
         }
 
         ServerLevel level = player.serverLevel();
         float damage = (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE);
-        for (Entity target : targetsAlongSpear(player, MINIMUM_ATTACK_RANGE)) {
+        java.util.List<Entity> targets = targetsAlongSpear(player, MINIMUM_ATTACK_RANGE);
+        MoreWeapons.LOGGER.debug("Processing spear jab: player={}, targets={}, damage={}", player.getScoreboardName(), targets.size(), damage);
+        for (Entity target : targets) {
             stabTarget(level, stack, player, target, damage, true, true, false, EquipmentSlot.MAINHAND);
         }
         player.resetAttackStrengthTicker();
@@ -224,7 +240,7 @@ public class SpearItem extends SwordItem {
         Vec3 look = player.getLookAngle().normalize();
         Vec3 eye = player.getEyePosition();
         Vec3 start = eye.add(look.scale(minimumAttackRange));
-        double movementExtension = Math.max(0.0D, lastTickMovement(player).dot(look));
+        double movementExtension = Math.max(0.0D, player.getKnownMovement().dot(look));
         double maximumRange = player.getAbilities().instabuild ? CREATIVE_MAXIMUM_ATTACK_RANGE : MAXIMUM_ATTACK_RANGE;
         Vec3 maximumEnd = eye.add(look.scale(maximumRange + movementExtension));
         HitResult blockHit = player.level().clip(new ClipContext(
@@ -270,12 +286,12 @@ public class SpearItem extends SwordItem {
 
     private ChargeProfile profile() {
         Tier tier = getTier();
-        if (tier == Tiers.NETHERITE) return new ChargeProfile(1.2D, 8, 50, 110, 175, 7.0D);
-        if (tier == Tiers.DIAMOND) return new ChargeProfile(1.075D, 10, 60, 130, 200, 7.5D);
-        if (tier == Tiers.IRON) return new ChargeProfile(0.95D, 12, 50, 135, 225, 8.0D);
-        if (tier == Tiers.GOLD) return new ChargeProfile(0.7D, 14, 70, 170, 275, 10.0D);
-        if (tier == ModTiers.COPPER) return new ChargeProfile(0.82D, 13, 80, 165, 250, 9.0D);
-        if (tier == Tiers.STONE) return new ChargeProfile(0.82D, 14, 90, 180, 275, 10.0D);
+        if (tier == Tiers.NETHERITE) return new ChargeProfile(1.2D, 8, 50, 110, 175, 9.0D);
+        if (tier == Tiers.DIAMOND) return new ChargeProfile(1.075D, 10, 60, 130, 200, 10.0D);
+        if (tier == Tiers.IRON) return new ChargeProfile(0.95D, 12, 50, 135, 225, 11.0D);
+        if (tier == Tiers.GOLD) return new ChargeProfile(0.7D, 14, 70, 170, 275, 13.0D);
+        if (tier == ModTiers.COPPER) return new ChargeProfile(0.82D, 13, 80, 165, 250, 12.0D);
+        if (tier == Tiers.STONE) return new ChargeProfile(0.82D, 14, 90, 180, 275, 13.0D);
         return new ChargeProfile(0.7D, 15, 100, 200, 300, 14.0D);
     }
 
@@ -297,11 +313,7 @@ public class SpearItem extends SwordItem {
         if (!(entity instanceof Player) && entity.isPassenger()) {
             entity = entity.getRootVehicle();
         }
-        return lastTickMovement(entity).scale(20.0D);
-    }
-
-    private static Vec3 lastTickMovement(Entity entity) {
-        return entity.position().subtract(new Vec3(entity.xo, entity.yo, entity.zo));
+        return entity.getKnownMovement().scale(20.0D);
     }
 
     private static void applyLunge(ItemStack stack, Player player) {

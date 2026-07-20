@@ -5,6 +5,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import org.destroyermob.mobsmoreweapons.MoreWeapons;
 import org.destroyermob.mobsmoreweapons.client.IaiIndicator;
 import org.destroyermob.mobsmoreweapons.client.GreatSwordAnimationCompatibility;
 import org.destroyermob.mobsmoreweapons.client.KnifePickupAnimationCompatibility;
@@ -43,6 +44,7 @@ public final class ModNetworking {
     private static void handleSpearJab(SpearJabPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
+                MoreWeapons.LOGGER.debug("Received spear jab payload for {}", player.getScoreboardName());
                 SpearItem.jab(player);
             }
         });

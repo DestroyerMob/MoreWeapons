@@ -1,5 +1,6 @@
 package org.destroyermob.mobsmoreweapons;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -27,6 +28,7 @@ import org.destroyermob.mobsmoreweapons.item.GreatSwordItem;
 import org.destroyermob.mobsmoreweapons.item.tier.ModArmorMaterials;
 import org.destroyermob.mobsmoreweapons.network.ModNetworking;
 import org.destroyermob.mobsmoreweapons.registry.ModSoundEvents;
+import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreWeapons.MOD_ID)
@@ -34,6 +36,7 @@ public class MoreWeapons {
 
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "mobsmoreweapons";
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public MoreWeapons(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, MoreWeaponsConfig.SPEC);
