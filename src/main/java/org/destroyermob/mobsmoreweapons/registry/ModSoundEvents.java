@@ -16,11 +16,22 @@ public final class ModSoundEvents {
             "item.armor.equip_copper",
             SoundEvent::createVariableRangeEvent
     );
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_ATTACK = variable("item.spear.attack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_HIT = variable("item.spear.hit");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_USE = variable("item.spear.use");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_WOOD_ATTACK = variable("item.spear_wood.attack");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_WOOD_HIT = variable("item.spear_wood.hit");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_WOOD_USE = variable("item.spear_wood.use");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEAR_LUNGE = variable("item.spear.lunge");
 
     private ModSoundEvents() {
     }
 
     public static void register(IEventBus bus) {
         SOUND_EVENTS.register(bus);
+    }
+
+    private static DeferredHolder<SoundEvent, SoundEvent> variable(String name) {
+        return SOUND_EVENTS.register(name, SoundEvent::createVariableRangeEvent);
     }
 }

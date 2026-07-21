@@ -1,6 +1,7 @@
 package org.destroyermob.mobsmoreweapons.network;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -12,7 +13,7 @@ import org.destroyermob.mobsmoreweapons.client.KnifePickupAnimationCompatibility
 import org.destroyermob.mobsmoreweapons.item.SpearItem;
 
 public final class ModNetworking {
-    private static final String PROTOCOL_VERSION = "3";
+    private static final String PROTOCOL_VERSION = "4";
 
     private ModNetworking() {
     }
@@ -23,10 +24,19 @@ public final class ModNetworking {
         registrar.playToClient(KnifePickupPayload.TYPE, KnifePickupPayload.STREAM_CODEC, ModNetworking::handleKnifePickup);
         registrar.playToClient(GreatSwordSweepAnimationPayload.TYPE, GreatSwordSweepAnimationPayload.STREAM_CODEC, ModNetworking::handleGreatSwordSweepAnimation);
         registrar.playToServer(SpearJabPayload.TYPE, SpearJabPayload.STREAM_CODEC, ModNetworking::handleSpearJab);
+        registrar.playToServer(
+                BetterCombatSpearLungePayload.TYPE,
+                BetterCombatSpearLungePayload.STREAM_CODEC,
+                ModNetworking::handleBetterCombatSpearLunge
+        );
     }
 
     public static void sendSpearJab() {
         PacketDistributor.sendToServer(SpearJabPayload.INSTANCE);
+    }
+
+    public static void sendBetterCombatSpearLunge() {
+        PacketDistributor.sendToServer(BetterCombatSpearLungePayload.INSTANCE);
     }
 
     private static void handleIaiState(IaiStatePayload payload, IPayloadContext context) {
@@ -46,6 +56,18 @@ public final class ModNetworking {
             if (context.player() instanceof ServerPlayer player) {
                 MoreWeapons.LOGGER.debug("Received spear jab payload for {}", player.getScoreboardName());
                 SpearItem.jab(player);
+            }
+        });
+    }
+
+    private static void handleBetterCombatSpearLunge(
+            BetterCombatSpearLungePayload payload,
+            IPayloadContext context
+    ) {
+        context.enqueueWork(() -> {
+            if (ModList.get().isLoaded("bettercombat")
+                    && context.player() instanceof ServerPlayer player) {
+                SpearItem.tryApplyBetterCombatLunge(player);
             }
         });
     }

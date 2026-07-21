@@ -130,7 +130,7 @@ public class ModItems {
     public static final DeferredItem<Item> DIAMONDSPEAR = ITEMS.register("diamond_spear",
             () -> new SpearItem(Tiers.DIAMOND, spearProperties(Tiers.DIAMOND, 0, -3.05f)));
     public static final DeferredItem<Item> NETHERITESPEAR = ITEMS.register("netherite_spear",
-            () -> new SpearItem(Tiers.NETHERITE, spearProperties(Tiers.NETHERITE, 0, -3.13f)));
+            () -> new SpearItem(Tiers.NETHERITE, spearProperties(Tiers.NETHERITE, 0, -3.13f).fireResistant()));
 
     // Mobs Tool Forging compatibility parts
     public static final DeferredItem<Item> IRONGREATSWORDBLADE = part("iron_great_sword_blade");

@@ -1,5 +1,6 @@
 package org.destroyermob.mobsmoreweapons.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.client.player.LocalPlayer;
 import org.destroyermob.mobsmoreweapons.config.MoreWeaponsConfig;
 import org.destroyermob.mobsmoreweapons.item.BattleAxeItem;
@@ -9,17 +10,29 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 /** Backports 1.21.11 spear use_effects: full movement speed and sprinting while charging. */
 @Mixin(LocalPlayer.class)
 public abstract class SpearUseMovementMixin {
-    @Redirect(
+    @ModifyExpressionValue(
             method = "aiStep",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem()Z"
+            )
+    )
+    private boolean mobsmoreweapons$allowFullSpearMovementAndSprint(boolean usingItem) {
+        LocalPlayer player = (LocalPlayer) (Object) this;
+        return SpearItem.isSpear(player.getUseItem()) ? false : usingItem;
+    }
+
+    @ModifyExpressionValue(
+            method = "canStartSprinting",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;isUsingItem()Z")
     )
-    private boolean mobsmoreweapons$allowMovementWhileCharging(LocalPlayer player) {
-        return player.isUsingItem() && !SpearItem.isSpear(player.getUseItem());
+    private boolean mobsmoreweapons$allowSprintingWhileCharging(boolean usingItem) {
+        LocalPlayer player = (LocalPlayer) (Object) this;
+        return SpearItem.isSpear(player.getUseItem()) ? false : usingItem;
     }
 
     @ModifyConstant(method = "aiStep", constant = @Constant(floatValue = 0.2F))

@@ -4,15 +4,23 @@
   "refmap": "mobsmoreweapons.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "LivingEntitySpearMixin",
     "LivingEntityAttackStrengthAccessor",
     "ProjectileAccuracyMixin"
   ],
   "client": [
+    "BetterCombatSpearLungeMixin",
+    "BetterCombatSpearRecoveryMixin",
+    "BetterCombatSpearUseMixin",
+    "HumanoidModelSpearMixin",
     "MinecraftSpearAttackMixin",
     "PunchyGreatSwordComboMixin",
     "PunchyKatanaStanceMixin",
+    "PunchySpearCompatibilityMixin",
     "PunchySpearStateMachineMixin",
     "PunchyTridentStateMachineMixin",
+    "SpearItemInHandLayerMixin",
+    "SpearItemInHandRendererMixin",
     "SpearUseMovementMixin"
   ],
   "injectors": {

@@ -9,5 +9,53 @@
       "mobsmoreweapons:item/armor/equip_copper5",
       "mobsmoreweapons:item/armor/equip_copper6"
     ]
+  },
+  "item.spear.attack": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear.attack",
+    "sounds": [
+      "mobsmoreweapons:item/spear/attack1",
+      "mobsmoreweapons:item/spear/attack2",
+      "mobsmoreweapons:item/spear/attack3"
+    ]
+  },
+  "item.spear.hit": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear.hit",
+    "sounds": [
+      "mobsmoreweapons:item/spear/hit1",
+      "mobsmoreweapons:item/spear/hit2",
+      "mobsmoreweapons:item/spear/hit3"
+    ]
+  },
+  "item.spear.use": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear.use",
+    "sounds": ["mobsmoreweapons:item/spear/use"]
+  },
+  "item.spear_wood.attack": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear_wood.attack",
+    "sounds": [
+      "mobsmoreweapons:item/spear/wood_attack1",
+      "mobsmoreweapons:item/spear/wood_attack2",
+      "mobsmoreweapons:item/spear/wood_attack3"
+    ]
+  },
+  "item.spear_wood.hit": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear_wood.hit",
+    "sounds": [
+      "mobsmoreweapons:item/spear/wood_hit1",
+      "mobsmoreweapons:item/spear/wood_hit2",
+      "mobsmoreweapons:item/spear/wood_hit3"
+    ]
+  },
+  "item.spear_wood.use": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear_wood.use",
+    "sounds": ["mobsmoreweapons:item/spear/wood_use"]
+  },
+  "item.spear.lunge": {
+    "subtitle": "subtitles.mobsmoreweapons.item.spear.lunge",
+    "sounds": [
+      "mobsmoreweapons:item/spear/lunge1",
+      "mobsmoreweapons:item/spear/lunge2",
+      "mobsmoreweapons:item/spear/lunge3"
+    ]
   }
 }
